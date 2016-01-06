@@ -1,0 +1,12 @@
+<h1>{headline}</h1>
+<f:form action="{action}" object="{post}" name="post" arguments="{blog:blog}" additionalAttributes="{role:'form'}">
+    <div class="form-group">
+        <label>Post Title</label>
+        <f:form.textfield property="title" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Post Content</label>
+        <f:form.textarea property="content" class="form-control" />
+    </div>
+    <f:form.submit value="{submitmessage}" class="btn btn-primary" />
+</f:form>

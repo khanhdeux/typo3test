@@ -1,0 +1,10 @@
+<f:layout name="default"/>
+<f:section name="content">
+    <h1>Delete Post?</h1>
+    Are you sure you want to delete the Post entitled <strong>{post.title}</strong> (belongs to Blog "{blog.title}")?
+    <br/></br >
+    <f:link.action action="show" controller="Blog" arguments="{blog:blog}" class="btn btn-danger">Cancel
+    </f:link.action>
+    <f:link.action action="delete" class="btn btn-success" arguments="{blog:blog,post:post}">Yes!
+    </f:link.action>
+</f:section>
