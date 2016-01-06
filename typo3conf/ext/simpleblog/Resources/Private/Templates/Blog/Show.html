@@ -5,4 +5,21 @@
     <dt>Blog Description:</dt>
     <dd>{blog.description}</dd>
 </dl>
-<f:link.action action="list" class="btn btn-primary">Back to Blog listing</f:link.action>
+<f:if condition="{blog.posts}">
+    <ul class="list-group">
+        <f:for each="{blog.posts}" as="post">
+            <li class="list-group-item">{post.title}
+                <f:link.action action="deleteConfirm" controller="Post" arguments="{blog:blog,post:post}" class="btn btn-primary btn-xs pullright">
+                    DEL
+                </f:link.action>
+                <f:link.action action="updateForm" controller="Post" arguments="{blog:blog,post:post}" class="btn btn-primary btn-xs pullright margin-right">EDIT
+                </f:link.action>
+                <f:link.action action="show" controller="Post" arguments="{blog:blog,post:post}" class="btn btn-primary btn-xs pullright margin-right">SHOW
+                </f:link.action>
+            </li>
+        </f:for>
+    </ul>
+</f:if>
+<f:link.action action="addForm" controller="Post" arguments="{blog:blog}" class="btn btn-primary">Create Post
+</f:link.action><br/><br/>
+<f:link.action action="list" class="btn btn-primary">Back to Blog List</f:link.action>
