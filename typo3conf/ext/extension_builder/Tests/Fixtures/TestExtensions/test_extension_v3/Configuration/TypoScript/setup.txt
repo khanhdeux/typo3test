@@ -1,0 +1,57 @@
+plugin.tx_testextension_testplugin {
+	view {
+		templateRootPath = {$plugin.tx_testextension_testplugin.view.templateRootPath}
+		partialRootPath = {$plugin.tx_testextension_testplugin.view.partialRootPath}
+		layoutRootPath = {$plugin.tx_testextension_testplugin.view.layoutRootPath}
+	}
+	persistence {
+		storagePid = {$plugin.tx_testextension_testplugin.persistence.storagePid}
+	}
+}
+
+plugin.tx_testextension._CSS_DEFAULT_STYLE (
+	textarea.f3-form-error {
+		background-color:#FF9F9F;
+		border: 1px #FF0000 solid;
+	}
+
+	input.f3-form-error {
+		background-color:#FF9F9F;
+		border: 1px #FF0000 solid;
+	}
+
+	.tx-test-extension table {
+		border-collapse:separate;
+		border-spacing:10px;
+	}
+
+	.tx-test-extension table th {
+		font-weight:bold;
+	}
+
+	.tx-test-extension table td {
+		vertical-align:top;
+	}
+
+	.typo3-messages .message-error {
+		color:red;
+	}
+
+	.typo3-messages .message-ok {
+		color:green;
+	}
+)
+
+
+
+ # Module configuration
+module.tx_testextension_testmodule {
+	persistence {
+		storagePid = {$module.tx_testextension_testmodule.persistence.storagePid}
+	}
+	view {
+		templateRootPath = {$module.tx_testextension_testmodule.view.templateRootPath}
+		partialRootPath = {$module.tx_testextension_testmodule.view.partialRootPath}
+		layoutRootPath = {$module.tx_testextension_testmodule.view.layoutRootPath}
+	}
+}

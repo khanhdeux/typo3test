@@ -1,0 +1,62 @@
+
+plugin.tx_simpleblog_bloglisting {
+    view {
+        templateRootPath = {$plugin.tx_simpleblog_bloglisting.view.templateRootPath}
+        partialRootPath = {$plugin.tx_simpleblog_bloglisting.view.partialRootPath}
+        layoutRootPath = {$plugin.tx_simpleblog_bloglisting.view.layoutRootPath}
+    }
+    persistence {
+        storagePid = {$plugin.tx_simpleblog_bloglisting.persistence.storagePid}
+    }
+    settings {
+        blog {
+            max = 5
+        }
+    }
+}
+
+plugin.tx_simpleblog._CSS_DEFAULT_STYLE (
+	textarea.f3-form-error {
+		background-color:#FF9F9F;
+		border: 1px #FF0000 solid;
+	}
+
+	input.f3-form-error {
+		background-color:#FF9F9F;
+		border: 1px #FF0000 solid;
+	}
+
+	.tx-simpleblog table {
+		border-collapse:separate;
+		border-spacing:10px;
+	}
+
+	.tx-simpleblog table th {
+		font-weight:bold;
+	}
+
+	.tx-simpleblog table td {
+		vertical-align:top;
+	}
+
+	.typo3-messages .message-error {
+		color:red;
+	}
+
+	.typo3-messages .message-ok {
+		color:green;
+	}
+
+)
+
+page {
+    includeCSS {
+        bootstrap = EXT:simpleblog/Resources/Public/Bootstrap/css/bootstrap.min.css
+        simpleblog = EXT:simpleblog/Resources/Public/Css/simpleblog.css
+    }
+    includeJSlibs {
+        jquery = //code.jquery.com/jquery.js
+        jquery.external = 1
+        bootstrap = EXT:simpleblog/Resources/Public/Bootstrap/js/bootstrap.min.js
+    }
+}

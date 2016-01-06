@@ -1,0 +1,47 @@
+{
+    "modules": [],
+    "properties": {
+        "backendModules": [],
+        "description": "This is the example from the book",
+        "emConf": {
+            "category": "plugin",
+            "custom_category": "",
+            "dependsOn": "typo3 => 6.2.0-6.2.99\n",
+            "disableLocalization": false,
+            "disableVersioning": false,
+            "skipGenerateDocumentationTemplate": false,
+            "sourceLanguage": "en",
+            "state": "alpha",
+            "version": "0.0.1"
+        },
+        "extensionKey": "simpleblog",
+        "name": "Simple Blog Extension",
+        "originalExtensionKey": "",
+        "persons": [
+            {
+                "company": "khanhdeux",
+                "email": "khanhdeux@gmail.com",
+                "name": "Quoc Khanh Nguyen",
+                "role": "Developer"
+            }
+        ],
+        "plugins": [
+            {
+                "actions": {
+                    "controllerActionCombinations": "Blog => list",
+                    "noncacheableActions": "Blog => list",
+                    "switchableActions": ""
+                },
+                "key": "bloglisting",
+                "name": "Simpleblog - Bloglisting"
+            }
+        ],
+        "vendorName": "Lobacher"
+    },
+    "wires": [],
+    "log": {
+        "last_modified": "2016-01-03 05:46",
+        "extension_builder_version": "6.2",
+        "be_user": " (1)"
+    }
+}

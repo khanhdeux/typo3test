@@ -1,0 +1,23 @@
+<html xmlns:f="http://typo3.org/ns/fluid/ViewHelpers">
+<f:layout name="defaultLayout" />
+
+<f:section name="content">
+
+<p>{helloworld1}</p>
+
+<p>{helloworld2.0} {helloworld2.1} {helloworld2.2}</p>
+
+<p>{helloworld3.first} {helloworld3.middle} {helloworld3.last}</p>
+
+<p>{helloworld4.title}</p>
+
+<ul>
+<f:for each="{helloworld5}" as="helloworld">
+    <li>{helloworld.title}</li>
+</f:for>
+</ul>
+
+<f:link.action action="show">Example link to action "show"</f:link.action>
+
+</f:section>
+</html>

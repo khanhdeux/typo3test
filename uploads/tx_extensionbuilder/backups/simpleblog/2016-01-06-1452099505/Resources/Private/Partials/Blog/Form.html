@@ -1,0 +1,13 @@
+<h1>{headline}</h1>
+<div class="alert alert-danger"><f:render partial="Error" arguments="{object:'blog'}" /></div>
+<f:form action="{action}" object="{blog}" name="blog" additionalAttributes="{role:'form'}">
+    <div class="form-group">
+        <label>Blog Titlle</label>
+        <f:form.textfield property="titlle" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Blog Description</label>
+        <f:form.textarea property="description" class="form-control" />
+    </div>
+    <f:form.submit value="{submitmessage}" class="btn btn-primary" />
+</f:form>
