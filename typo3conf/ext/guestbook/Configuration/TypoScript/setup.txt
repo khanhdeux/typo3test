@@ -1,0 +1,88 @@
+
+plugin.tx_guestbook_commentlisting {
+	view {
+		templateRootPath = {$plugin.tx_guestbook_commentlisting.view.templateRootPath}
+		partialRootPath = {$plugin.tx_guestbook_commentlisting.view.partialRootPath}
+		layoutRootPath = {$plugin.tx_guestbook_commentlisting.view.layoutRootPath}
+	}
+	persistence {
+        storagePid = 6,9,11,12
+        recursive = 1
+        classes {
+            Vendor\Guestbook\Domain\Model\Comment {
+                newRecordStoragePid = 12
+            }
+            Vendor\Guestbook\Domain\Model\Author {
+                mapping {
+                    tableName = fe_users
+                    columns {
+                        name.mapOnProperty = fullname
+                    }
+                }
+            }
+        }
+	}
+
+    settings {
+        loginpage = 10
+    }
+
+}
+
+plugin.tx_guestbook._CSS_DEFAULT_STYLE (
+	textarea.f3-form-error {
+		background-color:#FF9F9F;
+		border: 1px #FF0000 solid;
+	}
+
+	input.f3-form-error {
+		background-color:#FF9F9F;
+		border: 1px #FF0000 solid;
+	}
+
+	.tx-guestbook table {
+		border-collapse:separate;
+		border-spacing:10px;
+	}
+
+	.tx-guestbook table th {
+		font-weight:bold;
+	}
+
+	.tx-guestbook table td {
+		vertical-align:top;
+	}
+
+	.typo3-messages .message-error {
+		color:red;
+	}
+
+	.typo3-messages .message-ok {
+		color:green;
+	}
+
+)
+
+page {
+    includeCSS {
+    }
+
+    includeJSlibs {
+        jquery = //code.jquery.com/jquery.js
+        jquery.external = 1
+    }
+
+}
+
+ajax = PAGE
+ajax {
+    typeNum = 99
+    config {
+        disableAllHeaderCode = 1
+        additionalHeaders = Content-type:application/json
+        xhtml_cleaning = 0
+        admPanel = 0
+        debug = 0
+    }
+    10 < tt_content.list.20.guestbook_commentlisting
+}

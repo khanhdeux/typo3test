@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-01-10T01:38:39Z" product-name="guestbook">
+		<header/>
+		<body>
+			<trans-unit id="title.description">
+				<source>title</source>
+			</trans-unit>
+			<trans-unit id="author.description">
+				<source>author</source>
+			</trans-unit>
+			<trans-unit id="text.description">
+				<source>text</source>
+			</trans-unit>
+			<trans-unit id="comments.description">
+				<source>comments</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
