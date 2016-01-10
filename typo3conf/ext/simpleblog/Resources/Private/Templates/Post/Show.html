@@ -1,4 +1,4 @@
-<f:layout name="default" />
+<f:layout name="default"/>
 <f:section name="content">
     <h1>View Post (Blog: {blog.title})</h1>
     <dl class="dl-horizontal">
@@ -6,6 +6,46 @@
         <dd>{post.title}</dd>
         <dt>Post Content:</dt>
         <dd>{post.content}</dd>
+        <dt>Post Author:</dt>
+        <dd>{post.author.fullname} (Email: {post.author.email})</dd>
+        <dt>Post-Tags</dt>
+        <dd>
+            <f:for each="{post.tags}" as="tag">
+                <span class="label label-default">{tag.tagvalue}</span>
+            </f:for>
+        </dd>
     </dl>
-    <f:link.action action="show" controller="Blog" arguments="{blog:blog}" class="btn btn-primary">Back to Blog List</f:link.action>
+    <h3>Comments</h3>
+    <f:form action="ajax" name="comment" object="{comment}" arguments="{post:post}">
+        <f:form.textarea property="comment" id="commentfield"/>
+        <f:form.submit value="Submit comment" class="btn btn-primary btn-xs" id="commentsubmit"/>
+    </f:form>
+    <ul class="list-group" id="comments">
+        <f:for each="{post.comments}" as="comment" reverse="TRUE">
+            <li class="list-group-item">{comment.comment} <span class="textmuted">(
+                {comment.commentdate -> f:format.date(format: 'Y-m-d H:i:s')})</span></li>
+        </f:for>
+    </ul>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#commentsubmit').click(function () {
+                var ajaxURL = '<f:uri.action action="ajax" controller="Post" pageType="99" arguments="{post:post}" noCacheHash="1" />';
+                var form = $('form');
+                $.post(ajaxURL, form.serialize(), function (response) {
+                    console.log(response);
+                    var items = [];
+                    $.each(response, function (key, val) {
+                        items.push('<li class="list-group-item">' + val.comment + ' <span class="text-muted">(' + val.commentdate.date + ')</span > ' + '</li>');
+                    });
+                    $('#comments').html(items.reverse().join(''));
+                    $('#commentfield').val('');
+                });
+                return false;
+            });
+        });
+    </script>
+
+    <f:link.action action="show" controller="Blog" arguments="{blog:blog}" class="btn btn-primary">Back to Blog List
+    </f:link.action>
 </f:section>

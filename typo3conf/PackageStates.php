@@ -475,10 +475,10 @@ return array (
       array (
       ),
     ),
-    'simpleblog' => 
+    'guestbook' => 
     array (
       'state' => 'active',
-      'packagePath' => 'typo3conf/ext/simpleblog/',
+      'packagePath' => 'typo3conf/ext/guestbook/',
       'classesPath' => 'Classes/',
       'suggestions' => 
       array (
@@ -510,6 +510,15 @@ return array (
       'composerName' => 'typo3/cms-adodb',
       'state' => 'inactive',
       'packagePath' => 'typo3/sysext/adodb/',
+      'classesPath' => 'Classes/',
+      'suggestions' => 
+      array (
+      ),
+    ),
+    'blog_example' => 
+    array (
+      'state' => 'inactive',
+      'packagePath' => 'typo3conf/ext/blog_example/',
       'classesPath' => 'Classes/',
       'suggestions' => 
       array (
@@ -570,6 +579,15 @@ return array (
       array (
       ),
     ),
+    'inventory' => 
+    array (
+      'state' => 'inactive',
+      'packagePath' => 'typo3conf/ext/inventory/',
+      'classesPath' => 'Classes/',
+      'suggestions' => 
+      array (
+      ),
+    ),
     'linkvalidator' => 
     array (
       'manifestPath' => '',
@@ -620,6 +638,15 @@ return array (
       'composerName' => 'typo3/cms-scheduler',
       'state' => 'inactive',
       'packagePath' => 'typo3/sysext/scheduler/',
+      'classesPath' => 'Classes/',
+      'suggestions' => 
+      array (
+      ),
+    ),
+    'simpleblog' => 
+    array (
+      'state' => 'inactive',
+      'packagePath' => 'typo3conf/ext/simpleblog/',
       'classesPath' => 'Classes/',
       'suggestions' => 
       array (

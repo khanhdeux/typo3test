@@ -1,17 +1,49 @@
-
 plugin.tx_simpleblog_bloglisting {
     view {
         templateRootPath = {$plugin.tx_simpleblog_bloglisting.view.templateRootPath}
         partialRootPath = {$plugin.tx_simpleblog_bloglisting.view.partialRootPath}
         layoutRootPath = {$plugin.tx_simpleblog_bloglisting.view.layoutRootPath}
     }
+
+    #    persistence {
+    #        storagePid = {$plugin.tx_simpleblog_bloglisting.persistence.storagePid}
+    #    }
     persistence {
-        storagePid = {$plugin.tx_simpleblog_bloglisting.persistence.storagePid}
+        storagePid = 3,4,9
+        recursive = 1
+        classes {
+            Lobacher\Simpleblog\Domain\Model\Blog {
+                newRecordStoragePid = 4
+            }
+
+            Lobacher\Simpleblog\Domain\Model\Post {
+                newRecordStoragePid = 5
+            }
+
+            Lobacher\Simpleblog\Domain\Model\Comment {
+                newRecordStoragePid = 6
+            }
+
+            Lobacher\Simpleblog\Domain\Model\Tag {
+                newRecordStoragePid = 7
+            }
+
+            Lobacher\Simpleblog\Domain\Model\Author {
+                mapping {
+                    tableName = fe_users
+                    columns {
+                        name.mapOnProperty = fullname
+                    }
+                }
+            }
+        }
     }
+
     settings {
         blog {
             max = 5
         }
+        loginpage = 10
     }
 }
 
@@ -54,9 +86,28 @@ page {
         bootstrap = EXT:simpleblog/Resources/Public/Bootstrap/css/bootstrap.min.css
         simpleblog = EXT:simpleblog/Resources/Public/Css/simpleblog.css
     }
+
     includeJSlibs {
         jquery = //code.jquery.com/jquery.js
         jquery.external = 1
         bootstrap = EXT:simpleblog/Resources/Public/Bootstrap/js/bootstrap.min.js
     }
+
+    includeJS {
+        addComment = EXT:simpleblog/Resources/Public/Js/addComment.js
+    }
+
+}
+
+ajax = PAGE
+ajax {
+    typeNum = 99
+    config {
+        disableAllHeaderCode = 1
+        additionalHeaders = Content-type:application/json
+        xhtml_cleaning = 0
+        admPanel = 0
+        debug = 0
+    }
+    10 < tt_content.list.20.simpleblog_bloglisting
 }

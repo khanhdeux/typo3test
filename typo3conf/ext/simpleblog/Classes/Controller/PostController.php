@@ -19,6 +19,18 @@ class PostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     protected $persistenceManager;
 
+    public function initializeAction()
+    {
+        $action = $this->request->getControllerActionName();
+        // check, if a different action than "show" was executed
+        if ($action != 'show' && $action != 'ajax') {
+            // redirect to the login page (UID=12), if user is not logged-in
+            if (!$GLOBALS['TSFE']->fe_user->user['uid']) {
+                $this->redirect(NULL, NULL, NULL, NULL, $this->settings['loginpage']);
+            }
+        }
+    }
+
     /**
      * addForm action - displays a form for adding a post
      *
@@ -31,6 +43,7 @@ class PostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     {
         $this->view->assign('blog', $blog);
         $this->view->assign('post', $post);
+        $this->view->assign('tags', $this->objectManager->get('Lobacher\\Simpleblog\\Domain\\Repository\\TagRepository')->findAll());
     }
 
     /**
@@ -45,6 +58,8 @@ class PostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     {
 //        $post->setPostdate(new \DateTime());
         //$this->postRepository->add($post);
+        $post->setAuthor($this->objectManager->get('Lobacher\\Simpleblog\\Domain\\Repository\\AuthorRepository')->findOneByUid($GLOBALS['TSFE']->fe_user->user['uid']));
+
         $blog->addPost($post);
         $this->objectManager->get('Lobacher\\Simpleblog\\Domain\\Repository\\BlogRepository')->update($blog);
         $this->redirect('show', 'Blog', NULL, array('blog' => $blog));
@@ -76,6 +91,7 @@ class PostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     {
         $this->view->assign('blog', $blog);
         $this->view->assign('post', $post);
+        $this->view->assign('tags', $this->objectManager->get('Lobacher\\Simpleblog\\Domain\\Repository\\TagRepository')->findAll());
     }
 
     /**
@@ -121,6 +137,33 @@ class PostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $this->objectManager->get('Lobacher\\Simpleblog\\Domain\\Repository\\BlogRepository')->update($blog);
         $this->postRepository->remove($post);
         $this->redirect('show', 'Blog', NULL, array('blog' => $blog));
+    }
+
+    /**
+     * Ajax action - deletes a post in the repository
+     *
+     * @param \Lobacher\Simpleblog\Domain\Model\Post $post
+     * @param \Lobacher\Simpleblog\Domain\Model\Comment $comment
+     *
+     * @return bool|string
+     */
+    public function ajaxAction(\Lobacher\Simpleblog\Domain\Model\Post $post, \Lobacher\Simpleblog\Domain\Model\Comment $comment = NULL)
+    {
+
+        if ($comment->getComment() == "") return FALSE;
+        // set datetime of comment and add comment to Post
+        $comment->setCommentdate(new \DateTime());
+        $post->addComment($comment);
+        $this->postRepository->update($post);
+        $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager')->persistAll();
+        $comments = $post->getComments();
+        foreach ($comments as $comment) {
+            $json[$comment->getUid()] = array(
+                'comment' => $comment->getComment(),
+                'commentdate' => $comment->getCommentdate()
+            );
+        }
+        return json_encode($json);
     }
 
 }

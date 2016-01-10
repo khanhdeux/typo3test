@@ -5,6 +5,7 @@ return array(
 		'explicitADmode' => 'explicitAllow',
 		'installToolPassword' => '$P$CXLM1HoQPp7qkDxJMxqvlnpybq2uLE/',
 		'loginSecurityLevel' => 'rsa',
+		'versionNumberInFilename' => '0',
 	),
 	'DB' => array(
 		'database' => 'typo3test',
@@ -19,9 +20,17 @@ return array(
 		'extConf' => array(
 			'efempty' => 'a:0:{}',
 			'extension_builder' => 'a:3:{s:15:"enableRoundtrip";s:1:"1";s:15:"backupExtension";s:1:"1";s:9:"backupDir";s:35:"uploads/tx_extensionbuilder/backups";}',
+			'guestbook' => 'a:0:{}',
+			'inventory' => 'a:0:{}',
+			'kickstarter' => 'a:0:{}',
 			'rsaauth' => 'a:1:{s:18:"temporaryDirectory";s:0:"";}',
 			'saltedpasswords' => 'a:2:{s:3:"BE.";a:4:{s:21:"saltedPWHashingMethod";s:41:"TYPO3\\CMS\\Saltedpasswords\\Salt\\PhpassSalt";s:11:"forceSalted";i:0;s:15:"onlyAuthService";i:0;s:12:"updatePasswd";i:1;}s:3:"FE.";a:5:{s:7:"enabled";i:1;s:21:"saltedPWHashingMethod";s:41:"TYPO3\\CMS\\Saltedpasswords\\Salt\\PhpassSalt";s:11:"forceSalted";i:0;s:15:"onlyAuthService";i:0;s:12:"updatePasswd";i:1;}}',
 			'simpleblog' => 'a:0:{}',
+		),
+	),
+	'EXTCONF' => array(
+		'lang' => array(
+			'availableLanguages' => array(),
 		),
 	),
 	'FE' => array(
@@ -58,7 +67,7 @@ return array(
 		'clearCacheSystem' => FALSE,
 		'compat_version' => '6.2',
 		'devIPmask' => '',
-		'displayErrors' => 0,
+		'displayErrors' => '1',
 		'enableDeprecationLog' => FALSE,
 		'encryptionKey' => 'be9445d3449af9cd38277add0c85183afe64f83ba20b4f5e9cbf1e941b088ec38c2d4a8742b44199bc6f37eb91dcfe83',
 		'isInitialInstallationInProgress' => FALSE,
