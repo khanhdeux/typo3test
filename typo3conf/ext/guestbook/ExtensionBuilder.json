@@ -52,6 +52,16 @@
                             "propertyName": "email",
                             "propertyType": "String",
                             "uid": "593849866503"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": false,
+                            "propertyIsRequired": false,
+                            "propertyName": "image",
+                            "propertyType": "Text",
+                            "uid": "1143620738813"
                         }
                     ]
                 },
@@ -185,7 +195,7 @@
         }
     ],
     "log": {
-        "last_modified": "2016-01-10 08:01",
+        "last_modified": "2016-01-11 01:36",
         "extension_builder_version": "6.2",
         "be_user": " (1)"
     }

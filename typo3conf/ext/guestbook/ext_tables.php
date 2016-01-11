@@ -16,3 +16,5 @@ if (!defined('TYPO3_MODE')) {
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_guestbook_domain_model_comment', 'EXT:guestbook/Resources/Private/Language/locallang_csh_tx_guestbook_domain_model_comment.xlf');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_guestbook_domain_model_comment');
+
+$TCA['fe_users']['ctrl']['label'] = 'name';

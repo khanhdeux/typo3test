@@ -2,13 +2,15 @@
 <f:section name="content">
     <f:security.ifAuthenticated>
         <f:then>
-            <f:form action="ajax" name="comment" object="{comment}">
+            <f:form action="ajaxAddComment" name="comment" object="{comment}">
                 <f:form.textarea property="comment" id="commentfield"/>
                 <f:form.submit value="Submit comment" class="btn btn-primary btn-xs" id="commentsubmit"/>
             </f:form>
+            Please go <f:link.page pageUid="{settings.loginpage}">here</f:link.page> to change user <br/>
+            <f:image src="fileadmin/profile_photo/{author.image}" maxWidth="30" maxHeight="30" /> {author.fullname} (Email: {author.email}) <f:link.action controller="Author" action="updateForm" arguments="{author:author}">EDIT</f:link.action>
         </f:then>
         <f:else>
-            Please <f:link.page pageUid="{settings.loginpage}">Login</f:link.page> to comment
+            Please <f:link.page pageUid="{settings.loginpage}">Login</f:link.page> to comment. Or <f:link.action controller="Author" action="addForm" arguments="{author:author}">Here</f:link.action> to register
         </f:else>
     </f:security.ifAuthenticated>
 
@@ -16,30 +18,12 @@
         <f:for each="{comments}" as="comment" reverse="TRUE">
             <li class="list-group-item">{comment.comment}
                 <span class="textmuted">({comment.commentdate -> f:format.date(format: 'Y-m-d H:i:s')})</span>
-                <br /><small><i>{comment.author.fullname} (Email: {comment.author.email})</i></small>
+                <br /><f:image src="fileadmin/profile_photo/{comment.author.image}" maxWidth="30" maxHeight="30" /> <small><i>{comment.author.fullname} (Email: {comment.author.email})</i></small>
             </li>
         </f:for>
     </ul>
 
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('#commentsubmit').click(function () {
-                var ajaxURL = '<f:uri.action action="ajax" controller="Comment" pageType="99" noCacheHash="1" />';
-                var form = $('form');
-                $.post(ajaxURL, form.serialize(), function (response) {
-                    console.log(response);
-                    var items = [];
-                    $.each(response, function (key, val) {
-                        var res = '<li class="list-group-item">' + val.comment + ' <span class="text-muted">(' + val.commentdate.date + ')</span > ';
-                            res += '<br /><small><i>'+ val.author.fullname + '(Email:' + val.author.email + ')</i></small>';
-                            res += '</li>';
-                        items.push(res);
-                    });
-                    $('#comments').html(items.reverse().join(''));
-                    $('#commentfield').val('');
-                });
-                return false;
-            });
-        });
+        var ajaxURL = '<f:uri.action action="ajaxAddComment" controller="Comment" pageType="99" noCacheHash="1" />';
     </script>
 </f:section>

@@ -33,7 +33,7 @@ class Author extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * fullname
-	 *
+	 * 
 	 * @var string
 	 * @validate NotEmpty
 	 */
@@ -41,11 +41,19 @@ class Author extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * email
-	 *
+	 * 
 	 * @var string
 	 * @validate NotEmpty
 	 */
 	protected $email = '';
+
+	/**
+	 * image
+	 * 
+	 * @var string
+	 * @validate NotEmpty
+	 */
+	protected $image = '';
 
 	/**
 	 * __construct
@@ -60,7 +68,7 @@ class Author extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * Do not modify this method!
 	 * It will be rewritten on each save in the extension builder
 	 * You may modify the constructor of this class instead
-	 *
+	 * 
 	 * @return void
 	 */
 	protected function initStorageObjects() {
@@ -69,7 +77,7 @@ class Author extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * Returns the fullname
-	 *
+	 * 
 	 * @return string fullname
 	 */
 	public function getFullname() {
@@ -78,7 +86,7 @@ class Author extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * Sets the fullname
-	 *
+	 * 
 	 * @param string $fullname
 	 * @return void
 	 */
@@ -88,7 +96,7 @@ class Author extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * Returns the email
-	 *
+	 * 
 	 * @return string email
 	 */
 	public function getEmail() {
@@ -97,12 +105,31 @@ class Author extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * Sets the email
-	 *
+	 * 
 	 * @param string $email
 	 * @return void
 	 */
 	public function setEmail($email) {
 		$this->email = $email;
+	}
+
+	/**
+	 * Returns the image
+	 * 
+	 * @return string $image
+	 */
+	public function getImage() {
+		return $this->image;
+	}
+
+	/**
+	 * Sets the image
+	 * 
+	 * @param string $image
+	 * @return void
+	 */
+	public function setImage($image) {
+		$this->image = $image;
 	}
 
 }
