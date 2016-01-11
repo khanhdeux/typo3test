@@ -6,11 +6,11 @@ plugin.tx_guestbook_commentlisting {
 		layoutRootPath = {$plugin.tx_guestbook_commentlisting.view.layoutRootPath}
 	}
 	persistence {
-        storagePid = 6,9,11,12
+        storagePid = 3,4,5
         recursive = 1
         classes {
             Vendor\Guestbook\Domain\Model\Comment {
-                newRecordStoragePid = 12
+                newRecordStoragePid = 5
             }
             Vendor\Guestbook\Domain\Model\Author {
                 mapping {
@@ -24,7 +24,7 @@ plugin.tx_guestbook_commentlisting {
 	}
 
     settings {
-        loginpage = 10
+        loginpage = 6
     }
 
 }
@@ -64,7 +64,9 @@ plugin.tx_guestbook._CSS_DEFAULT_STYLE (
 )
 
 page {
-    includeCSS {
+
+    includeJS {
+        addComment = EXT:guestbook/Resources/Public/Js/addComment.js
     }
 
     includeJSlibs {
@@ -74,8 +76,8 @@ page {
 
 }
 
-ajax = PAGE
-ajax {
+ajaxAddComment = PAGE
+ajaxAddComment {
     typeNum = 99
     config {
         disableAllHeaderCode = 1

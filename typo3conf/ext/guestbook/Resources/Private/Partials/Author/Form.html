@@ -1,0 +1,23 @@
+<h1>{headline}</h1>
+
+<f:form enctype="multipart/form-data" action="{action}" object="{author}" name="author" arguments="{author:author}" additionalAttributes="{role:'form'}">
+    <div class="form-group">
+        <label>Fullname</label>
+        <f:form.textfield property="fullname" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Email</label>
+        <f:form.textfield property="email" class="form-control" />
+    </div>
+    <!--<div class="form-group">-->
+        <!--<label>Password</label>-->
+        <!--<f:form.password property="password" class="form-control" />-->
+    <!--</div>-->
+    <div class="form-group">
+        <label>Profile image</label>
+        <br/>Current Image:  <f:image src="fileadmin/profile_photo/{author.image}" maxWidth="30" maxHeight="30" /> <br/>
+        <f:form.upload name="image" />
+    </div>
+    <f:form.submit value="{submitmessage}" class="btn btn-primary" />
+    <f:link.action controller="Comment" action="list"><- Back</f:link.action>
+</f:form>

@@ -7,12 +7,12 @@ if (!defined('TYPO3_MODE')) {
 	'Vendor.' . $_EXTKEY,
 	'Commentlisting',
 	array(
-		'Comment' => 'list,ajax',
-		
+		'Comment' => 'list,ajaxAddComment',
+		'Author' => 'add,addForm,updateForm,update'
 	),
 	// non-cacheable actions
 	array(
-		'Comment' => 'list,ajax',
-		
+		'Comment' => 'list,ajaxAddComment',
+		'Author' => 'add,addForm,updateForm,update'
 	)
 );

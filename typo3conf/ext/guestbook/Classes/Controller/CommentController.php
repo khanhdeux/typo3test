@@ -28,17 +28,25 @@ class CommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     public function listAction()
     {
+
+        if ($authorID = $GLOBALS['TSFE']->fe_user->user['uid']) {
+
+            $author = $this->objectManager->get('Vendor\\Guestbook\\Domain\\Repository\\AuthorRepository')->findOneByUid($authorID);
+            $this->view->assign('author', $author);
+
+        }
+
         $this->view->assign('comments', $this->commentRepository->findAll());
     }
 
     /**
-     * Ajax action - deletes a post in the repository
+     * Ajax action - Add more comments
      *
      * @param \Vendor\Guestbook\Domain\Model\Comment $comment
      *
      * @return bool|string
      */
-    public function ajaxAction(\Vendor\Guestbook\Domain\Model\Comment $comment = NULL)
+    public function ajaxAddCommentAction(\Vendor\Guestbook\Domain\Model\Comment $comment = NULL)
     {
 
         if ($comment->getComment() == "") return FALSE;
@@ -50,7 +58,9 @@ class CommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $this->commentRepository->add($comment);
         $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager')->persistAll();
         $comments = $this->commentRepository->findAll();
+
         foreach ($comments as $comment) {
+
             $json[$comment->getUid()] = array(
                 'comment' => $comment->getComment(),
                 'commentdate' => $comment->getCommentdate(),
@@ -59,7 +69,9 @@ class CommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                     'email' => $author->getEmail()
                 )
             );
+
         }
+
         return json_encode($json);
 
     }

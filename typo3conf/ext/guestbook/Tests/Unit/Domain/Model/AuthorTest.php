@@ -93,4 +93,27 @@ class AuthorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			$this->subject
 		);
 	}
+
+	/**
+	 * @test
+	 */
+	public function getImageReturnsInitialValueForString() {
+		$this->assertSame(
+			'',
+			$this->subject->getImage()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setImageForStringSetsImage() {
+		$this->subject->setImage('Conceived at T3CON10');
+
+		$this->assertAttributeEquals(
+			'Conceived at T3CON10',
+			'image',
+			$this->subject
+		);
+	}
 }

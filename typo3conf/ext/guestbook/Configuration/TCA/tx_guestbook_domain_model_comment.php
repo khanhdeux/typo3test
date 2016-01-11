@@ -137,11 +137,11 @@ return array(
 			),
 		),
 		'author' => array(
-			'exclude' => 0,
+			'exclude' => 1,
 			'label' => 'LLL:EXT:guestbook/Resources/Private/Language/locallang_db.xlf:tx_guestbook_domain_model_comment.author',
 			'config' => array(
-                'type' => 'select',
-                'foreign_table' => 'fe_users',
+				'type' => 'select',
+				'foreign_table' => 'tx_guestbook_domain_model_author',
 				'minitems' => 0,
 				'maxitems' => 1,
 			),
