@@ -51,6 +51,29 @@ class AuthorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 	/**
 	 * @test
 	 */
+	public function getUsernameReturnsInitialValueForString() {
+		$this->assertSame(
+			'',
+			$this->subject->getUsername()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setUsernameForStringSetsUsername() {
+		$this->subject->setUsername('Conceived at T3CON10');
+
+		$this->assertAttributeEquals(
+			'Conceived at T3CON10',
+			'username',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 */
 	public function getFullnameReturnsInitialValueForString() {
 		$this->assertSame(
 			'',
@@ -116,4 +139,37 @@ class AuthorTest extends \TYPO3\CMS\Core\Tests\UnitTestCase {
 			$this->subject
 		);
 	}
+
+	/**
+	 * @test
+	 */
+	public function getPasswordReturnsInitialValueForString() {
+		$this->assertSame(
+			'',
+			$this->subject->getPassword()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setPasswordForStringSetsPassword() {
+		$this->subject->setPassword('Conceived at T3CON10');
+
+		$this->assertAttributeEquals(
+			'Conceived at T3CON10',
+			'password',
+			$this->subject
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getUsergroupReturnsInitialValueForInt() {	}
+
+	/**
+	 * @test
+	 */
+	public function setUsergroupForIntSetsUsergroup() {	}
 }

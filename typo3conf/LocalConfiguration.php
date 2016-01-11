@@ -1,7 +1,7 @@
 <?php
 return array(
 	'BE' => array(
-		'debug' => FALSE,
+		'debug' => '',
 		'explicitADmode' => 'explicitAllow',
 		'installToolPassword' => '$P$CXLM1HoQPp7qkDxJMxqvlnpybq2uLE/',
 		'loginSecurityLevel' => 'rsa',
@@ -35,7 +35,7 @@ return array(
 	),
 	'FE' => array(
 		'activateContentAdapter' => FALSE,
-		'debug' => FALSE,
+		'debug' => '',
 		'loginSecurityLevel' => 'rsa',
 	),
 	'GFX' => array(
@@ -64,16 +64,16 @@ return array(
 				),
 			),
 		),
-		'clearCacheSystem' => FALSE,
+		'clearCacheSystem' => '',
 		'compat_version' => '6.2',
 		'devIPmask' => '',
 		'displayErrors' => '1',
-		'enableDeprecationLog' => FALSE,
+		'enableDeprecationLog' => '',
 		'encryptionKey' => 'be9445d3449af9cd38277add0c85183afe64f83ba20b4f5e9cbf1e941b088ec38c2d4a8742b44199bc6f37eb91dcfe83',
 		'isInitialInstallationInProgress' => FALSE,
 		'sitename' => 'New TYPO3 site',
-		'sqlDebug' => 0,
-		'systemLogLevel' => 2,
+		'sqlDebug' => '0',
+		'systemLogLevel' => '2',
 		't3lib_cs_convMethod' => 'mbstring',
 		't3lib_cs_utils' => 'mbstring',
 	),

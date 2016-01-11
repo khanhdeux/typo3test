@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2016-01-11T13:36:22Z" product-name="guestbook">
+	<file source-language="en" datatype="plaintext" original="messages" date="2016-01-11T23:46:00Z" product-name="guestbook">
 		<header/>
 		<body>
+			<trans-unit id="username.description">
+				<source>username</source>
+			</trans-unit>
 			<trans-unit id="fullname.description">
 				<source>fullname</source>
 			</trans-unit>
@@ -11,6 +14,12 @@
 			</trans-unit>
 			<trans-unit id="image.description">
 				<source>image</source>
+			</trans-unit>
+			<trans-unit id="password.description">
+				<source>password</source>
+			</trans-unit>
+			<trans-unit id="usergroup.description">
+				<source>usergroup</source>
 			</trans-unit>
 		</body>
 	</file>

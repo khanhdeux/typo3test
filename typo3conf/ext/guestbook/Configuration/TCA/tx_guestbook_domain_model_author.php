@@ -2,7 +2,7 @@
 return array(
 	'ctrl' => array(
 		'title'	=> 'LLL:EXT:guestbook/Resources/Private/Language/locallang_db.xlf:tx_guestbook_domain_model_author',
-		'label' => 'fullname',
+		'label' => 'username',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',
@@ -19,14 +19,14 @@ return array(
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		),
-		'searchFields' => 'fullname,email,image,',
+		'searchFields' => 'username,fullname,email,image,password,usergroup,',
 		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('guestbook') . 'Resources/Public/Icons/tx_guestbook_domain_model_author.gif'
 	),
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, fullname, email, image',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, username, fullname, email, image, password, usergroup',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, fullname, email, image, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, username, fullname, email, image, password, usergroup, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -114,13 +114,22 @@ return array(
 			),
 		),
 
-		'fullname' => array(
+		'username' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:guestbook/Resources/Private/Language/locallang_db.xlf:tx_guestbook_domain_model_author.fullname',
+			'label' => 'LLL:EXT:guestbook/Resources/Private/Language/locallang_db.xlf:tx_guestbook_domain_model_author.username',
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
 				'eval' => 'trim,required'
+			),
+		),
+		'fullname' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:guestbook/Resources/Private/Language/locallang_db.xlf:tx_guestbook_domain_model_author.fullname',
+			'config' => array(
+				'type' => 'input',
+				'size' => 30,
+				'eval' => 'trim'
 			),
 		),
 		'email' => array(
@@ -133,13 +142,31 @@ return array(
 			),
 		),
 		'image' => array(
-			'exclude' => 0,
+			'exclude' => 1,
 			'label' => 'LLL:EXT:guestbook/Resources/Private/Language/locallang_db.xlf:tx_guestbook_domain_model_author.image',
 			'config' => array(
 				'type' => 'text',
 				'cols' => 40,
 				'rows' => 15,
 				'eval' => 'trim'
+			)
+		),
+		'password' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:guestbook/Resources/Private/Language/locallang_db.xlf:tx_guestbook_domain_model_author.password',
+			'config' => array(
+				'type' => 'input',
+				'size' => 30,
+				'eval' => 'nospace,password,required'
+			)
+		),
+		'usergroup' => array(
+			'exclude' => 1,
+			'label' => 'LLL:EXT:guestbook/Resources/Private/Language/locallang_db.xlf:tx_guestbook_domain_model_author.usergroup',
+			'config' => array(
+				'type' => 'input',
+				'size' => 4,
+				'eval' => 'int'
 			)
 		),
 		

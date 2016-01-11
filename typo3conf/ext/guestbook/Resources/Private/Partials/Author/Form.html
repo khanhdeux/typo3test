@@ -2,6 +2,10 @@
 
 <f:form enctype="multipart/form-data" action="{action}" object="{author}" name="author" arguments="{author:author}" additionalAttributes="{role:'form'}">
     <div class="form-group">
+        <label>Username</label>
+        <f:form.textfield property="username" class="form-control" />
+    </div>
+    <div class="form-group">
         <label>Fullname</label>
         <f:form.textfield property="fullname" class="form-control" />
     </div>
@@ -9,10 +13,10 @@
         <label>Email</label>
         <f:form.textfield property="email" class="form-control" />
     </div>
-    <!--<div class="form-group">-->
-        <!--<label>Password</label>-->
-        <!--<f:form.password property="password" class="form-control" />-->
-    <!--</div>-->
+    <div class="form-group">
+        <label>Password</label>
+        <f:form.password property="password" class="form-control" />
+    </div>
     <div class="form-group">
         <label>Profile image</label>
         <br/>Current Image:  <f:image src="fileadmin/profile_photo/{author.image}" maxWidth="30" maxHeight="30" /> <br/>

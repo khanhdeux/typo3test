@@ -32,8 +32,16 @@ namespace Vendor\Guestbook\Domain\Model;
 class Author extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
+	 * username
+	 *
+	 * @var string
+	 * @validate NotEmpty
+	 */
+	protected $username = '';
+
+	/**
 	 * fullname
-	 * 
+	 *
 	 * @var string
 	 * @validate NotEmpty
 	 */
@@ -41,7 +49,7 @@ class Author extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * email
-	 * 
+	 *
 	 * @var string
 	 * @validate NotEmpty
 	 */
@@ -49,11 +57,25 @@ class Author extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * image
-	 * 
+	 *
+	 * @var string
+	 */
+	protected $image = '';
+
+	/**
+	 * password
+	 *
 	 * @var string
 	 * @validate NotEmpty
 	 */
-	protected $image = '';
+	protected $password = '';
+
+	/**
+	 * usergroup
+	 *
+	 * @var int
+	 */
+	protected $usergroup = 0;
 
 	/**
 	 * __construct
@@ -68,7 +90,7 @@ class Author extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * Do not modify this method!
 	 * It will be rewritten on each save in the extension builder
 	 * You may modify the constructor of this class instead
-	 * 
+	 *
 	 * @return void
 	 */
 	protected function initStorageObjects() {
@@ -77,7 +99,7 @@ class Author extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * Returns the fullname
-	 * 
+	 *
 	 * @return string fullname
 	 */
 	public function getFullname() {
@@ -86,7 +108,7 @@ class Author extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * Sets the fullname
-	 * 
+	 *
 	 * @param string $fullname
 	 * @return void
 	 */
@@ -96,7 +118,7 @@ class Author extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * Returns the email
-	 * 
+	 *
 	 * @return string email
 	 */
 	public function getEmail() {
@@ -105,7 +127,7 @@ class Author extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * Sets the email
-	 * 
+	 *
 	 * @param string $email
 	 * @return void
 	 */
@@ -115,7 +137,7 @@ class Author extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * Returns the image
-	 * 
+	 *
 	 * @return string $image
 	 */
 	public function getImage() {
@@ -124,12 +146,69 @@ class Author extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * Sets the image
-	 * 
+	 *
 	 * @param string $image
 	 * @return void
 	 */
 	public function setImage($image) {
 		$this->image = $image;
+	}
+
+	/**
+	 * Returns the password
+	 *
+	 * @return string $password
+	 */
+	public function getPassword() {
+		return $this->password;
+	}
+
+	/**
+	 * Sets the password
+	 *
+	 * @param string $password
+	 * @return void
+	 */
+	public function setPassword($password) {
+		$this->password = $password;
+	}
+
+	/**
+	 * Returns the username
+	 *
+	 * @return string $username
+	 */
+	public function getUsername() {
+		return $this->username;
+	}
+
+	/**
+	 * Sets the username
+	 *
+	 * @param string $username
+	 * @return void
+	 */
+	public function setUsername($username) {
+		$this->username = $username;
+	}
+
+	/**
+	 * Returns the usergroup
+	 *
+	 * @return int $usergroup
+	 */
+	public function getUsergroup() {
+		return $this->usergroup;
+	}
+
+	/**
+	 * Sets the usergroup
+	 *
+	 * @param int $usergroup
+	 * @return void
+	 */
+	public function setUsergroup($usergroup) {
+		$this->usergroup = $usergroup;
 	}
 
 }

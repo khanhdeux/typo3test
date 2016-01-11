@@ -33,7 +33,7 @@ class Comment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * comment
-	 * 
+	 *
 	 * @var string
 	 * @validate NotEmpty
 	 */
@@ -41,21 +41,21 @@ class Comment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * commentdate
-	 * 
+	 *
 	 * @var \DateTime
 	 */
 	protected $commentdate = NULL;
 
 	/**
 	 * author
-	 * 
+	 *
 	 * @var \Vendor\Guestbook\Domain\Model\Author
 	 */
 	protected $author = NULL;
 
 	/**
 	 * Returns the comment
-	 * 
+	 *
 	 * @return string comment
 	 */
 	public function getComment() {
@@ -64,7 +64,7 @@ class Comment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * Sets the comment
-	 * 
+	 *
 	 * @param string $comment
 	 * @return void
 	 */
@@ -74,7 +74,7 @@ class Comment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * Returns the commentdate
-	 * 
+	 *
 	 * @return \DateTime $commentdate
 	 */
 	public function getCommentdate() {
@@ -83,7 +83,7 @@ class Comment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * Sets the commentdate
-	 * 
+	 *
 	 * @param \DateTime $commentdate
 	 * @return void
 	 */
@@ -93,7 +93,7 @@ class Comment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * Returns the author
-	 * 
+	 *
 	 * @return \Vendor\Guestbook\Domain\Model\Author $author
 	 */
 	public function getAuthor() {
@@ -102,7 +102,7 @@ class Comment extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * Sets the author
-	 * 
+	 *
 	 * @param \Vendor\Guestbook\Domain\Model\Author $author
 	 * @return void
 	 */

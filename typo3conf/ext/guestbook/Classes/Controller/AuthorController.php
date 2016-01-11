@@ -25,6 +25,7 @@ class AuthorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      * updateForm action - displays a form for editing author
      *
      * @param \Vendor\Guestbook\Domain\Model\Author $author
+     * @ignorevalidation
      */
     public function updateFormAction(\Vendor\Guestbook\Domain\Model\Author $author)
     {
@@ -39,10 +40,7 @@ class AuthorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     public function updateAction(\Vendor\Guestbook\Domain\Model\Author $author)
     {
 
-        if($fileData = $this->uploadAction()) {
-            $author->setImage($fileData->getName());
-        };
-
+        $this->fillInAuthData($author);
         $this->authorRepository->update($author);
         $this->redirect('updateForm', 'Author', NULL, array('author' => $author));
 
@@ -53,7 +51,8 @@ class AuthorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      *
      * @return void
      */
-    public function uploadAction() {
+    public function uploadAction()
+    {
 
         $overwriteExistingFiles = NO;
 
@@ -62,8 +61,8 @@ class AuthorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 
         $dirName = 'profile_photo';
 
-        if (!is_dir('fileadmin/'. $dirName)) {
-            mkdir('fileadmin/'. $dirName, 0777, true);
+        if (!is_dir('fileadmin/' . $dirName)) {
+            mkdir('fileadmin/' . $dirName, 0777, true);
         }
 
         $targetFalDirectory = '1:/profile_photo/';
@@ -86,7 +85,7 @@ class AuthorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         foreach ($result['upload'] as $files) {
 
             /** @var \TYPO3\CMS\Core\Resource\File $file */
-            $file = $files[0];	// Single element array due to the way we registered upload fields
+            $file = $files[0];    // Single element array due to the way we registered upload fields
             return $file;
 
         }
@@ -104,11 +103,13 @@ class AuthorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      * @param string $targetDirectory
      * @return void
      */
-    protected function registerUploadField(array &$data, $namespace, $fieldName, $targetDirectory = '1:/_temp_/') {
+    protected function registerUploadField(array &$data, $namespace, $fieldName, $targetDirectory = '1:/_temp_/')
+    {
 
         if (!isset($data['upload'])) {
             $data['upload'] = array();
         }
+
         $counter = count($data['upload']) + 1;
 
         $keys = array_keys($_FILES[$namespace]);
@@ -140,12 +141,83 @@ class AuthorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      */
     public function addAction(\Vendor\Guestbook\Domain\Model\Author $author)
     {
-        if($fileData = $this->uploadAction()) {
+
+        $this->fillInAuthData($author);
+        $this->authorRepository->add($author);
+        $this->redirect('list', 'Comment', NULL, NULL);
+
+    }
+
+    /**
+     * Fill in data to Author object
+     * @param \Vendor\Guestbook\Domain\Model\Author $author
+     */
+    private function fillInAuthData(\Vendor\Guestbook\Domain\Model\Author $author)
+    {
+
+        $userGroup = ($this->settings['usergroup']) ? $this->settings['usergroup'] : '';
+        $author->setUsergroup($userGroup);
+        $this->setAuthorImage($author);
+        $author->setPassword($this->getAuthorPassword());
+
+    }
+
+    /**
+     * Set auth Image
+     *
+     * @param \Vendor\Guestbook\Domain\Model\Author $author
+     */
+    private function setAuthorImage(\Vendor\Guestbook\Domain\Model\Author $author)
+    {
+
+        if ($fileData = $this->uploadAction()) {
             $author->setImage($fileData->getName());
         };
 
-        $this->authorRepository->update($author);
-        $this->redirect('list', 'Comment', NULL, NULL);
+    }
+
+    /**
+     * Get password from request
+     *
+     * @return bool|string
+     */
+    private function getAuthorPassword()
+    {
+
+        if (!$this->request->hasArgument('author')) return '';
+
+        $authArgs = $this->request->getArgument('author');
+
+        if ($authArgs && !empty($authArgs['password'])) {
+            return $this->getHashedPassword($authArgs['password']);
+        }
+
+        return '';
+
+    }
+
+    /**
+     * Get hashed password
+     *
+     * @param string $password
+     * @return string
+     */
+    private function getHashedPassword($password)
+    {
+
+        $saltedPassword = '';
+
+        if (\TYPO3\CMS\Saltedpasswords\Utility\SaltedPasswordsUtility::isUsageEnabled('FE')) {
+
+            $objSalt = \TYPO3\CMS\Saltedpasswords\Salt\SaltFactory::getSaltingInstance(NULL);
+
+            if (is_object($objSalt)) {
+                $saltedPassword = $objSalt->getHashedPassword($password);
+            }
+
+        }
+
+        return $saltedPassword;
 
     }
 

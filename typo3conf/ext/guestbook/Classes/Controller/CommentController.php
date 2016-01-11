@@ -37,6 +37,7 @@ class CommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         }
 
         $this->view->assign('comments', $this->commentRepository->findAll());
+
     }
 
     /**
@@ -50,6 +51,7 @@ class CommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     {
 
         if ($comment->getComment() == "") return FALSE;
+
         // set datetime of comment and add comment to Post
         $comment->setCommentdate(new \DateTime());
         $author = $this->objectManager->get('Vendor\\Guestbook\\Domain\\Repository\\AuthorRepository')->findOneByUid($GLOBALS['TSFE']->fe_user->user['uid']);

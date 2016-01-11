@@ -39,6 +39,16 @@
                             "propertyDescription": "",
                             "propertyIsExcludeField": false,
                             "propertyIsRequired": true,
+                            "propertyName": "username",
+                            "propertyType": "String",
+                            "uid": "552449679242"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsRequired": false,
                             "propertyName": "fullname",
                             "propertyType": "String",
                             "uid": "1175649052740"
@@ -57,11 +67,31 @@
                             "allowedFileTypes": "",
                             "maxItems": "1",
                             "propertyDescription": "",
-                            "propertyIsExcludeField": false,
+                            "propertyIsExcludeField": true,
                             "propertyIsRequired": false,
                             "propertyName": "image",
                             "propertyType": "Text",
                             "uid": "1143620738813"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": false,
+                            "propertyIsRequired": true,
+                            "propertyName": "password",
+                            "propertyType": "Password",
+                            "uid": "715466842236"
+                        },
+                        {
+                            "allowedFileTypes": "",
+                            "maxItems": "1",
+                            "propertyDescription": "",
+                            "propertyIsExcludeField": true,
+                            "propertyIsRequired": false,
+                            "propertyName": "usergroup",
+                            "propertyType": "Integer",
+                            "uid": "276185805267"
                         }
                     ]
                 },
@@ -195,7 +225,7 @@
         }
     ],
     "log": {
-        "last_modified": "2016-01-11 01:36",
+        "last_modified": "2016-01-11 11:46",
         "extension_builder_version": "6.2",
         "be_user": " (1)"
     }
