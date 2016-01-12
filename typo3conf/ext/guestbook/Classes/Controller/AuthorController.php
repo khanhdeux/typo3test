@@ -158,7 +158,7 @@ class AuthorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         $userGroup = ($this->settings['usergroup']) ? $this->settings['usergroup'] : '';
         $author->setUsergroup($userGroup);
         $this->setAuthorImage($author);
-        $author->setPassword($this->getAuthorPassword());
+        $author->setPassword($this->getAuthorPassword($author));
 
     }
 
@@ -179,20 +179,44 @@ class AuthorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     /**
      * Get password from request
      *
+     * @param \Vendor\Guestbook\Domain\Model\Author $author
      * @return bool|string
      */
-    private function getAuthorPassword()
+    private function getAuthorPassword(\Vendor\Guestbook\Domain\Model\Author $author)
     {
 
-        if (!$this->request->hasArgument('author')) return '';
-
-        $authArgs = $this->request->getArgument('author');
-
-        if ($authArgs && !empty($authArgs['password'])) {
-            return $this->getHashedPassword($authArgs['password']);
+        if ($this->checkAuthorPassword($author)) {
+            return $this->getHashedPassword($author->getPassword());
         }
 
-        return '';
+        return $author->getPassword();
+
+    }
+
+    /**
+     *  Check if password needs to be updated
+     *
+     * @param \Vendor\Guestbook\Domain\Model\Author $author
+     * @return bool|string
+     */
+    private function checkAuthorPassword(\Vendor\Guestbook\Domain\Model\Author $author)
+    {
+
+        $success = TRUE;
+
+        $dataProperties = $author->_getCleanProperties();
+
+        if(isset($dataProperties['password'])) {
+
+            $dataPass = $dataProperties['password'];
+
+            if($dataPass === $author->getPassword()) {
+                $success = FALSE;
+            }
+
+        }
+
+        return $success;
 
     }
 

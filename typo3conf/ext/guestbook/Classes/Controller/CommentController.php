@@ -54,11 +54,14 @@ class CommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
         // set datetime of comment and add comment to Post
         $comment->setCommentdate(new \DateTime());
+
+        /* @var \Vendor\Guestbook\Domain\Model\Author $author */
         $author = $this->objectManager->get('Vendor\\Guestbook\\Domain\\Repository\\AuthorRepository')->findOneByUid($GLOBALS['TSFE']->fe_user->user['uid']);
         $comment->setAuthor($author);
 
         $this->commentRepository->add($comment);
-        $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager')->persistAll();
+         $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager')->persistAll();
+        $this->commentRepository->update($comment);
         $comments = $this->commentRepository->findAll();
 
         foreach ($comments as $comment) {
@@ -67,8 +70,9 @@ class CommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                 'comment' => $comment->getComment(),
                 'commentdate' => $comment->getCommentdate(),
                 'author' => array(
-                    'fullname' => $author->getFullname(),
-                    'email' => $author->getEmail()
+                    'fullname' => $comment->getAuthor()->getFullname(),
+                    'email' => $comment->getAuthor()->getEmail(),
+                    'image' => $comment->getAuthor()->getImage()
                 )
             );
 

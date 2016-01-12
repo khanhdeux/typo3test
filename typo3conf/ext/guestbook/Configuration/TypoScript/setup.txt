@@ -6,14 +6,14 @@ plugin.tx_guestbook_commentlisting {
 		layoutRootPath = {$plugin.tx_guestbook_commentlisting.view.layoutRootPath}
 	}
     persistence {
-        storagePid = 6,9,11,12
+        storagePid = 3,4,5
         recursive = 1
         classes {
             Vendor\Guestbook\Domain\Model\Comment {
-                newRecordStoragePid = 12
+                newRecordStoragePid = 5
             }
             Vendor\Guestbook\Domain\Model\Author {
-                newRecordStoragePid = 9
+                newRecordStoragePid = 3
                 mapping {
                     tableName = fe_users
                     columns {
@@ -25,7 +25,7 @@ plugin.tx_guestbook_commentlisting {
     }
 
     settings {
-        loginpage = 10
+        loginpage = 6
         usergroup = 1
     }
 
