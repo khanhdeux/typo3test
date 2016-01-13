@@ -93,9 +93,9 @@ page {
         bootstrap = EXT:simpleblog/Resources/Public/Bootstrap/js/bootstrap.min.js
     }
 
-    includeJS {
-        addComment = EXT:simpleblog/Resources/Public/Js/addComment.js
-    }
+#    includeJS {
+#        addComment = EXT:simpleblog/Resources/Public/Js/addComment.js
+#    }
 
 }
 

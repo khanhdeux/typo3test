@@ -1,3 +1,4 @@
+{namespace pl = Lobacher\Simpleblog\ViewHelpers}
 <f:layout name="default"/>
 <f:section name="content">
     <h1>View Post (Blog: {blog.title})</h1>
@@ -7,7 +8,9 @@
         <dt>Post Content:</dt>
         <dd>{post.content}</dd>
         <dt>Post Author:</dt>
-        <dd>{post.author.fullname} (Email: {post.author.email})</dd>
+        <dd>{post.author.fullname} (Email: {post.author.email})
+        <br />
+        <pl:gravatar>{post.author.email}</pl:gravatar></dd>
         <dt>Post-Tags</dt>
         <dd>
             <f:for each="{post.tags}" as="tag">

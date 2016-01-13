@@ -475,6 +475,15 @@ return array (
       array (
       ),
     ),
+    'simpleblog' => 
+    array (
+      'state' => 'active',
+      'packagePath' => 'typo3conf/ext/simpleblog/',
+      'classesPath' => 'Classes/',
+      'suggestions' => 
+      array (
+      ),
+    ),
     'guestbook' => 
     array (
       'state' => 'active',
@@ -638,15 +647,6 @@ return array (
       'composerName' => 'typo3/cms-scheduler',
       'state' => 'inactive',
       'packagePath' => 'typo3/sysext/scheduler/',
-      'classesPath' => 'Classes/',
-      'suggestions' => 
-      array (
-      ),
-    ),
-    'simpleblog' => 
-    array (
-      'state' => 'inactive',
-      'packagePath' => 'typo3conf/ext/simpleblog/',
       'classesPath' => 'Classes/',
       'suggestions' => 
       array (
