@@ -1,7 +1,7 @@
 {namespace tv = Lobacher\Simpleblog\ViewHelpers}
 <h1>{headline}</h1>
 <div class="alert alert-danger"><f:render partial="Error" arguments="{object:'blog'}" /></div>
-<f:form action="{action}" object="{blog}" name="blog" additionalAttributes="{role:'form'}">
+<f:form enctype="multipart/form-data" action="{action}" object="{blog}" name="blog" additionalAttributes="{role:'form'}">
     <div class="form-group">
         <f:form.validationResults for="blog">
             <label {f:if(condition:validationResults.flattenedErrors.title,then:'class="text-danger"')}>Blog Title</label>
@@ -12,6 +12,11 @@
     <div class="form-group">
         <label>Blog Description</label>
         <f:form.textarea property="description" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Blog-Bild</label>
+        <f:if condition="{blog.image}"><br /><f:image src="uploads/tx_simpleblog/{blog.image}" /></f:if>
+        <f:form.upload property="image" class="form-control" />
     </div>
     <f:form.submit value="{submitmessage}" class="btn btn-primary" />
 </f:form>

@@ -2,8 +2,7 @@
 
 namespace Lobacher\Simpleblog\Controller;
 
-class BlogController extends \TYPO3\CMS\Extbase\Mvc\Controller
-\ActionController
+class BlogController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
     /**
      * blogRepository
@@ -21,6 +20,13 @@ class BlogController extends \TYPO3\CMS\Extbase\Mvc\Controller
      */
     protected $persistenceManager;
 
+    public function initializeAction()
+    {
+        if ($this->arguments->hasArgument('blog')) {
+            $this->arguments->getArgument('blog')->getPropertyMappingConfiguration()->setTargetTypeForSubProperty('image', 'array');
+        }
+    }
+
     /**
      * action
      * @return void
@@ -28,7 +34,7 @@ class BlogController extends \TYPO3\CMS\Extbase\Mvc\Controller
      */
     public function listAction()
     {
-        if ($this->request->hasArgument('search')){
+        if ($this->request->hasArgument('search')) {
             $search = $this->request->getArgument('search');
         }
         $limit = ($this->settings['blog']['max']) ?: NULL;
@@ -44,6 +50,13 @@ class BlogController extends \TYPO3\CMS\Extbase\Mvc\Controller
      */
     public function addAction(\Lobacher\Simpleblog\Domain\Model\Blog $blog)
     {
+
+        $this->addFlashMessage(
+            'Blog successfully created!',
+            'Status',
+            \TYPO3\CMS\Core\Messaging\AbstractMessage::OK, TRUE
+        );
+
         $this->blogRepository->add($blog);
         $this->redirect('list');
     }
@@ -105,12 +118,23 @@ class BlogController extends \TYPO3\CMS\Extbase\Mvc\Controller
 
     /**
      * deleteConfirm action - displays a form for confirming the deletion ↩
-    of a blog
+     * of a blog
      *
      * @param \Lobacher\Simpleblog\Domain\Model\Blog $blog
      */
-    public function deleteConfirmAction(\Lobacher\Simpleblog\Domain\Model\Blog $blog) {
-        $this->view->assign('blog',$blog);
+    public function deleteConfirmAction(\Lobacher\Simpleblog\Domain\Model\Blog $blog)
+    {
+        $this->view->assign('blog', $blog);
+    }
+
+    /**
+     * RSS Feed for the posts of one blog
+     *
+     * @param \Lobacher\Simpleblog\Domain\Model\Blog $blog
+     */
+    public function rssAction(\Lobacher\Simpleblog\Domain\Model\Blog $blog)
+    {
+        $this->view->assign('blog', $blog);
     }
 
 }

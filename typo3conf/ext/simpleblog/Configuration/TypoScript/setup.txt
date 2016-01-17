@@ -43,7 +43,14 @@ plugin.tx_simpleblog_bloglisting {
         blog {
             max = 5
         }
+
         loginpage = 10
+    }
+
+    _LOCAL_LANG {
+        de {
+            headline.blog = Liste aller Blogs
+        }
     }
 }
 
@@ -93,10 +100,9 @@ page {
         bootstrap = EXT:simpleblog/Resources/Public/Bootstrap/js/bootstrap.min.js
     }
 
-#    includeJS {
-#        addComment = EXT:simpleblog/Resources/Public/Js/addComment.js
-#    }
-
+    #    includeJS {
+    #        addComment = EXT:simpleblog/Resources/Public/Js/addComment.js
+    #    }
 }
 
 ajax = PAGE
@@ -109,5 +115,40 @@ ajax {
         admPanel = 0
         debug = 0
     }
+
     10 < tt_content.list.20.simpleblog_bloglisting
+}
+
+module.tx_simpleblog_bloglisting < plugin.tx_simpleblog_bloglisting
+
+config.tx_extbase.legacy.enableLegacyFlashMessageHandling = 0
+
+rss = PAGE
+rss {
+    typeNum = 100
+    10 = USER
+    10 {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = Simpleblog
+        pluginName = Bloglisting
+        vendorName = Lobacher
+        controller = Blog
+        action = rss
+        switchableControllerActions {
+            Blog {
+                1 = rss
+            }
+        }
+
+        settings =< plugin.tx_simpleblog.settings
+        persistence =< plugin.tx_simpleblog.persistence
+        view =< plugin.tx_simpleblog.view
+    }
+
+    config {
+        disableAllHeaderCode = 1
+        additionalHeaders = Content-type:application/xml
+        xhtml_cleaning = 0
+        admPanel = 0
+    }
 }

@@ -19,6 +19,14 @@ class PostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     protected $persistenceManager;
 
+    /**
+     * SignalSlotDispatcher
+     *
+     * @var \TYPO3\CMS\Extbase\SignalSlot\Dispatcher
+     * @inject
+     */
+    protected $signalSlotDispatcher;
+
     public function initializeAction()
     {
         $action = $this->request->getControllerActionName();
@@ -154,6 +162,14 @@ class PostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         // set datetime of comment and add comment to Post
         $comment->setCommentdate(new \DateTime());
         $post->addComment($comment);
+
+        // signal for comments
+        $this->signalSlotDispatcher->dispatch(
+            __CLASS__,
+            'beforeCommentCreation',
+            array($comment,$post)
+        );
+
         $this->postRepository->update($post);
         $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager')->persistAll();
         $comments = $post->getComments();

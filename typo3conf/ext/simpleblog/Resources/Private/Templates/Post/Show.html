@@ -1,7 +1,7 @@
 {namespace pl = Lobacher\Simpleblog\ViewHelpers}
 <f:layout name="default"/>
 <f:section name="content">
-    <h1>View Post (Blog: {blog.title})</h1>
+    <h1><f:translate key="headline.post" arguments="{1:blog.title,2:blog.uid}" /></h1>
     <dl class="dl-horizontal">
         <dt>Post Title:</dt>
         <dd>{post.title}</dd>

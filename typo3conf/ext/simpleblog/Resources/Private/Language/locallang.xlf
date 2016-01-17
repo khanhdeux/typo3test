@@ -3,6 +3,15 @@
 	<file source-language="en" datatype="plaintext" original="messages" date="2016-01-06T18:04:26Z" product-name="simpleblog">
 		<header/>
 		<body>
+            <trans-unit id="headline.blog">
+                <source>Blog List</source>
+            </trans-unit>
+            <trans-unit id="button.search">
+                <source>Search!</source>
+            </trans-unit>
+            <trans-unit id="headline.post">
+                <source>View post (Blog: %1$s / UID: %2$s)</source>
+            </trans-unit>
 			<trans-unit id="tx_simpleblog_domain_model_blog">
 				<source>Blog</source>
 			</trans-unit>

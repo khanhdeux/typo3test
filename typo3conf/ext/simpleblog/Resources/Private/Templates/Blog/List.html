@@ -3,6 +3,8 @@
 <f:layout name="default"/>
 <f:section name="content">
 
+    <f:flashMessages renderMode="div" class="alert alert-success" />
+
     <pl:isFrontend>
         <f:then>
             Frontend!
@@ -12,7 +14,7 @@
         </f:else>
     </pl:isFrontend>
 
-    <h1>Blog list</h1>
+    <h1><f:translate id="headline.blog" /></h1>
 
     <h3>
         <pl:tsfe>page|title</pl:tsfe>
@@ -21,7 +23,7 @@
         <div class="form-inline">
             <div class="form-group">
                 <f:form.textfield name="search" value="{search}" class="form-control"/>
-                <f:form.submit value="Search!" class="btn-xs btnprimary"/>
+                <f:form.submit value="{f:translate(id:'button.search')}" class="btn-xs btnprimary"/>
             </div>
         </div>
     </f:form>
