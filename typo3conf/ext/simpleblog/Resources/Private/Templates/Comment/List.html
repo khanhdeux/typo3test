@@ -1,0 +1,57 @@
+<f:be.container>
+    <div class="typo3-fullDoc">
+        <div id="typo3-docheader">
+            <div class="typo3-docheader-functions">
+                <div class="left">
+                    <f:be.buttons.csh field="delete"/>
+                    <div style="margin:-28px 28px;">
+                        <f:be.menus.actionMenu>
+                            <f:be.menus.actionMenuItem label="Comment Admin" controller="Comment" action="list"/>
+                            <f:be.menus.actionMenuItem label="Test" controller="Comment" action="test"/>
+                        </f:be.menus.actionMenu>
+                    </div>
+                </div>
+                <div class="right">
+                </div>
+            </div>
+            <div class="typo3-docheader-buttons">
+                <div class="left">
+                    <!-- Left Page -->
+                </div>
+                <div class="right">
+                    <f:be.buttons.shortcut/>
+                </div>
+            </div>
+        </div>
+        <div id="typo3-docbody">
+            <div id="typo3-inner-docbody">
+                <h1>Comment Admin</h1>
+
+                <h2>Comments (not deleted)</h2>
+                <ul>
+                    <f:for each="{commentsLive}" as="comment">
+                        <li>
+                            <f:link.action controller="Comment" action="delete" arguments="{comment:comment}">
+                                <f:be.buttons.icon icon="actions-edit-delete" title="Delete Comment"/>
+                            </f:link.action>
+                            <f:format.date format="Y-m-d H:i:s">{comment.commentdate}</f:format.date>
+                            &nbsp;&nbsp;
+                            {comment.comment}
+                        </li>
+                    </f:for>
+                </ul>
+                <h2>Comments (deleted)</h2>
+                <ul>
+                    <f:for each="{commentsDeleted}" as="comment">
+                        <li>
+                            <f:be.buttons.icon icon="apps-pagetree-dragplace-denied" title="Comment deleted"/>
+                            <f:format.date format="Y-m-d H:i:s">{comment.commentdate}</f:format.date>
+                            &nbsp;&nbsp;
+                            {comment.comment}
+                        </li>
+                    </f:for>
+                </ul>
+            </div>
+        </div>
+    </div>
+</f:be.container>
