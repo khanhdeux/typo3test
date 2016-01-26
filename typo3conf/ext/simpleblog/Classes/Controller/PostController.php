@@ -64,7 +64,7 @@ class PostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         \Lobacher\Simpleblog\Domain\Model\Blog $blog,
         \Lobacher\Simpleblog\Domain\Model\Post $post)
     {
-//        $post->setPostdate(new \DateTime());
+        $post->setPostdate(new \DateTime());
         //$this->postRepository->add($post);
         $post->setAuthor($this->objectManager->get('Lobacher\\Simpleblog\\Domain\\Repository\\AuthorRepository')->findOneByUid($GLOBALS['TSFE']->fe_user->user['uid']));
 

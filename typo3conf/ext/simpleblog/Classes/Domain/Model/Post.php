@@ -46,6 +46,13 @@ class Post extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	protected $content = '';
 
+    /**
+     * content
+     *
+     * @var \DateTime
+     */
+    protected $postdate = '';
+
 	/**
 	 * comments
 	 *
@@ -95,6 +102,22 @@ class Post extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	public function getContent() {
 		return $this->content;
 	}
+
+    /**
+     * @return \DateTime
+     */
+    public function getPostdate()
+    {
+        return $this->postdate;
+    }
+
+    /**
+     * @param \DateTime $postdate
+     */
+    public function setPostdate($postdate)
+    {
+        $this->postdate = $postdate;
+    }
 
 	/**
 	 * Sets the content

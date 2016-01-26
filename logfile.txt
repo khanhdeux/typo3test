@@ -9,3 +9,5 @@ Comment: test comment (Post: aaaa) / Lobacher\Simpleblog\Controller\PostControll
 Comment: test comment / 2016-01-17 20:45:07 / TYPO3\CMS\Extbase\Persistence\Generic\Backend::afterInsertObject
 Comment: aaaaasfd (Post: aaaa) / Lobacher\Simpleblog\Controller\PostController::beforeCommentCreation
 Comment: aaaaasfd / 2016-01-17 20:45:26 / TYPO3\CMS\Extbase\Persistence\Generic\Backend::afterInsertObject
+Comment: bbbbbbb (Post: aaaa) / Lobacher\Simpleblog\Controller\PostController::beforeCommentCreation
+Comment: bbbbbbb / 2016-01-26 21:26:19 / TYPO3\CMS\Extbase\Persistence\Generic\Backend::afterInsertObject

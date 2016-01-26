@@ -52,6 +52,7 @@ CREATE TABLE tx_simpleblog_domain_model_post (
 
 	title varchar(255) DEFAULT '' NOT NULL,
 	content text NOT NULL,
+  postdate datetime DEFAULT '0000-00-00 00:00:00',
 	comments int(11) unsigned DEFAULT '0' NOT NULL,
 	author int(11) unsigned DEFAULT '0',
 	tags int(11) unsigned DEFAULT '0' NOT NULL,

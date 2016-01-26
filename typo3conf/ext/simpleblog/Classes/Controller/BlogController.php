@@ -40,6 +40,15 @@ class BlogController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $limit = ($this->settings['blog']['max']) ?: NULL;
         $this->view->assign('blogs', $this->blogRepository->findSearchForm($search, $limit));
         $this->view->assign('search', $search);
+
+        $inputArray = array(
+            'title' => 'Rocky wants to go for a stroll!',
+            'postdate' => '2013-12-28T07:56:00+00:00'
+        );
+        $propertyMapper = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Property\\PropertyMapper');
+        $post = $propertyMapper->convert($inputArray,'Lobacher\Simpleblog\Domain\Model\Post');
+        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($post);
+
     }
 
     /**
