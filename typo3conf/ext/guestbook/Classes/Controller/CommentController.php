@@ -13,6 +13,14 @@ class CommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
     protected $commentRepository;
 
     /**
+     * authorRepository
+     *
+     * @var \Vendor\Guestbook\Domain\Repository\AuthorRepository
+     * @inject
+     */
+    protected $authorRepository;
+
+    /**
      * Persistence Manager
      *
      * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
@@ -31,7 +39,9 @@ class CommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
         if ($authorID = $GLOBALS['TSFE']->fe_user->user['uid']) {
 
-            $author = $this->objectManager->get('Vendor\\Guestbook\\Domain\\Repository\\AuthorRepository')->findOneByUid($authorID);
+//            $author = $this->objectManager->get('Vendor\\Guestbook\\Domain\\Repository\\AuthorRepository')->findOneByUid($authorID);
+            $author = $this->authorRepository->findByUid($authorID);
+            \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($author);
             $this->view->assign('author', $author);
 
         }

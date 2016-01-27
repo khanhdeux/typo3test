@@ -493,6 +493,15 @@ return array (
       array (
       ),
     ),
+    'femanager' => 
+    array (
+      'state' => 'active',
+      'packagePath' => 'typo3conf/ext/femanager/',
+      'classesPath' => 'Classes/',
+      'suggestions' => 
+      array (
+      ),
+    ),
     'extension_builder' => 
     array (
       'manifestPath' => '',
@@ -550,6 +559,15 @@ return array (
       'composerName' => 'typo3/cms-feedit',
       'state' => 'inactive',
       'packagePath' => 'typo3/sysext/feedit/',
+      'classesPath' => 'Classes/',
+      'suggestions' => 
+      array (
+      ),
+    ),
+    'femanagerextended' => 
+    array (
+      'state' => 'inactive',
+      'packagePath' => 'typo3conf/ext/femanagerextended/',
       'classesPath' => 'Classes/',
       'suggestions' => 
       array (

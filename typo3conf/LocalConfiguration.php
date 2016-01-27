@@ -20,6 +20,7 @@ return array(
 		'extConf' => array(
 			'efempty' => 'a:0:{}',
 			'extension_builder' => 'a:3:{s:15:"enableRoundtrip";s:1:"1";s:15:"backupExtension";s:1:"1";s:9:"backupDir";s:35:"uploads/tx_extensionbuilder/backups";}',
+			'femanager' => 'a:2:{s:13:"disableModule";s:1:"0";s:10:"disableLog";s:1:"0";}',
 			'guestbook' => 'a:0:{}',
 			'inventory' => 'a:0:{}',
 			'kickstarter' => 'a:0:{}',

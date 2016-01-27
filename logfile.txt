@@ -11,3 +11,7 @@ Comment: aaaaasfd (Post: aaaa) / Lobacher\Simpleblog\Controller\PostController::
 Comment: aaaaasfd / 2016-01-17 20:45:26 / TYPO3\CMS\Extbase\Persistence\Generic\Backend::afterInsertObject
 Comment: bbbbbbb (Post: aaaa) / Lobacher\Simpleblog\Controller\PostController::beforeCommentCreation
 Comment: bbbbbbb / 2016-01-26 21:26:19 / TYPO3\CMS\Extbase\Persistence\Generic\Backend::afterInsertObject
+Comment: cascasc (Post: aaaa) / Lobacher\Simpleblog\Controller\PostController::beforeCommentCreation
+Comment: cascasc / 2016-01-27 22:57:24 / TYPO3\CMS\Extbase\Persistence\Generic\Backend::afterInsertObject
+Comment: cacascacacas (Post: aaaa) / Lobacher\Simpleblog\Controller\PostController::beforeCommentCreation
+Comment: cacascacacas / 2016-01-27 22:57:28 / TYPO3\CMS\Extbase\Persistence\Generic\Backend::afterInsertObject
