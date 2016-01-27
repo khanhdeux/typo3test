@@ -82,3 +82,9 @@ CREATE TABLE tx_guestbook_domain_model_comment (
  KEY language (l10n_parent,sys_language_uid)
 
 );
+
+CREATE TABLE fe_users (
+        tx_guestbook_options varchar(255) DEFAULT '' NOT NULL,
+        tx_guestbook_special varchar(255) DEFAULT '' NOT NULL,
+        tx_guestbook_tax_id varchar(255) DEFAULT '' NOT NULL,
+);

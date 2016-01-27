@@ -77,6 +77,20 @@ class Author extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	protected $usergroup = 0;
 
+    /**
+     * options
+     *
+     * @var string
+     */
+    protected $options = '';
+
+    /**
+     * Tax Id
+     *
+     * @var string
+     */
+    protected $taxId = '';
+
 	/**
 	 * __construct
 	 */
@@ -210,5 +224,39 @@ class Author extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	public function setUsergroup($usergroup) {
 		$this->usergroup = $usergroup;
 	}
+
+    /**
+     * @return array $options
+     */
+    public function getOptions()
+    {
+        return unserialize($this->options);
+    }
+
+    /**
+     * @param array $options
+     * @return void
+     */
+    public function setOptions(array $options)
+    {
+        $this->options = serialize($options);
+    }
+
+    /**
+     * @return string
+     */
+    public function getTaxId()
+    {
+        return $this->taxId;
+    }
+
+    /**
+     * @param string $taxId
+     */
+    public function setTaxId($taxId)
+    {
+        $this->taxId = $taxId;
+    }
+
 
 }

@@ -18,6 +18,17 @@
         <f:form.password property="password" class="form-control" />
     </div>
     <div class="form-group">
+        <label>Options</label>
+        <f:form.checkbox property="options" value="1" multiple="1" />&nbsp:1<br />
+        <f:form.checkbox property="options" value="2" multiple="1" />&nbsp:2<br />
+        <f:form.checkbox property="options" value="3" multiple="1" />&nbsp:3<br />
+        An
+    </div>
+    <div class="form-group">
+        <label>Tax ID</label>
+        <f:form.textfield property="taxId" class="form-control" />
+    </div>
+    <div class="form-group">
         <label>Profile image</label>
         <br/>Current Image:  <f:image src="fileadmin/profile_photo/{author.image}" maxWidth="30" maxHeight="30" /> <br/>
         <f:form.upload name="image" />

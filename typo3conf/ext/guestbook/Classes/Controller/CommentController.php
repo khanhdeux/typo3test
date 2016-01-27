@@ -41,7 +41,6 @@ class CommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
 //            $author = $this->objectManager->get('Vendor\\Guestbook\\Domain\\Repository\\AuthorRepository')->findOneByUid($authorID);
             $author = $this->authorRepository->findByUid($authorID);
-            \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($author);
             $this->view->assign('author', $author);
 
         }

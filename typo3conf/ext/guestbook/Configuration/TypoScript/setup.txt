@@ -18,6 +18,8 @@ plugin.tx_guestbook_commentlisting {
                     tableName = fe_users
                     columns {
                         name.mapOnProperty = fullname
+                        tx_guestbook_options.mapOnProperty = options
+                        tx_guestbook_tax_id.mapOnProperty = taxId
                     }
                 }
             }

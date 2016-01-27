@@ -29,7 +29,20 @@ class AuthorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      */
     public function updateFormAction(\Vendor\Guestbook\Domain\Model\Author $author)
     {
+        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($author);
         $this->view->assign('author', $author);
+    }
+
+    /**
+     * initialize create action
+     *
+     * @return void
+     */
+    public function initializeUpdateAction() {
+        if ($this->arguments->hasArgument('author')) {
+            $this->arguments->getArgument('author')->getPropertyMappingConfiguration()->allowAllProperties();
+            $this->arguments->getArgument('author')->getPropertyMappingConfiguration()->setTargetTypeForSubProperty('options', 'array');
+        }
     }
 
     /**
