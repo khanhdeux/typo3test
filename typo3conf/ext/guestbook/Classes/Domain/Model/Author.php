@@ -91,6 +91,13 @@ class Author extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
      */
     protected $taxId = '';
 
+    /**
+     * Disable
+     *
+     * @var int
+     */
+    protected $disable = 0;
+
 	/**
 	 * __construct
 	 */
@@ -258,5 +265,20 @@ class Author extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
         $this->taxId = $taxId;
     }
 
+    /**
+     * @return int
+     */
+    public function getDisable()
+    {
+        return $this->disable;
+    }
+
+    /**
+     * @param int $disable
+     */
+    public function setDisable($disable)
+    {
+        $this->disable = $disable;
+    }
 
 }

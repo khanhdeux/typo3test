@@ -1,0 +1,5 @@
+
+-----------------
+http://localhost/typo3test/index.php?id=1&tx_guestbook_commentlisting%5Bauthor%5D=13&tx_guestbook_commentlisting%5Baction%5D=activate&tx_guestbook_commentlisting%5Bcontroller%5D=Author&cHash=413b2fccacb090d9e38728cebb460975
+-----------------
+http://localhost/typo3test/index.php?id=1&tx_guestbook_commentlisting%5Bauthor%5D=14&tx_guestbook_commentlisting%5Baction%5D=activate&tx_guestbook_commentlisting%5Bcontroller%5D=Author&cHash=e92fe23a493e2d70641c54df86275202

@@ -4,7 +4,6 @@ namespace Vendor\Guestbook\Controller;
 
 class AuthorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
-
     /**
      * authorRepository
      *
@@ -12,7 +11,6 @@ class AuthorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      * @inject
      */
     protected $authorRepository;
-
     /**
      * Persistence Manager
      *
@@ -29,16 +27,16 @@ class AuthorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      */
     public function updateFormAction(\Vendor\Guestbook\Domain\Model\Author $author)
     {
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($author);
         $this->view->assign('author', $author);
     }
 
     /**
-     * initialize create action
+     * initialize update action
      *
      * @return void
      */
-    public function initializeUpdateAction() {
+    public function initializeUpdateAction()
+    {
         if ($this->arguments->hasArgument('author')) {
             $this->arguments->getArgument('author')->getPropertyMappingConfiguration()->allowAllProperties();
             $this->arguments->getArgument('author')->getPropertyMappingConfiguration()->setTargetTypeForSubProperty('options', 'array');
@@ -56,7 +54,6 @@ class AuthorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         $this->fillInAuthData($author);
         $this->authorRepository->update($author);
         $this->redirect('updateForm', 'Author', NULL, array('author' => $author));
-
     }
 
     /**
@@ -100,11 +97,9 @@ class AuthorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             /** @var \TYPO3\CMS\Core\Resource\File $file */
             $file = $files[0];    // Single element array due to the way we registered upload fields
             return $file;
-
         }
 
         return false;
-
     }
 
     /**
@@ -134,7 +129,6 @@ class AuthorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             'data' => $counter,
             'target' => $targetDirectory,
         );
-
     }
 
     /**
@@ -148,17 +142,37 @@ class AuthorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     }
 
     /**
+     * initialize add action
+     *
+     * @return void
+     */
+    public function initializeAddAction()
+    {
+        if ($this->arguments->hasArgument('author')) {
+            $this->arguments->getArgument('author')->getPropertyMappingConfiguration()->allowAllProperties();
+            $this->arguments->getArgument('author')->getPropertyMappingConfiguration()->setTargetTypeForSubProperty('options', 'array');
+        }
+    }
+
+    /**
      * add action - adds an author to the repository
      *
      * @param \Vendor\Guestbook\Domain\Model\Author $author
      */
     public function addAction(\Vendor\Guestbook\Domain\Model\Author $author)
     {
-
         $this->fillInAuthData($author);
         $this->authorRepository->add($author);
-        $this->redirect('list', 'Comment', NULL, NULL);
+        $baseURL = $this->request->getBaseUri();
+        $this->persistenceManager->persistAll();
+        $emailConfirmationURL =  $baseURL . $this->getControllerContext()->getUriBuilder()->reset()->uriFor('activate', array('author' => $author), 'Author', $this->getControllerContext()->getRequest()->getControllerExtensionName());
 
+        $this->sendEmail($emailConfirmationURL);
+
+        file_put_contents('./debug.txt', print_r("\n-----------------\n", true), FILE_APPEND);
+        file_put_contents('./debug.txt', print_r($emailConfirmationURL, true), FILE_APPEND);
+
+        $this->redirect('list', 'Comment', NULL, NULL);
     }
 
     /**
@@ -167,12 +181,11 @@ class AuthorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      */
     private function fillInAuthData(\Vendor\Guestbook\Domain\Model\Author $author)
     {
-
         $userGroup = ($this->settings['usergroup']) ? $this->settings['usergroup'] : '';
         $author->setUsergroup($userGroup);
         $this->setAuthorImage($author);
         $author->setPassword($this->getAuthorPassword($author));
-
+        $author->setDisable(1);
     }
 
     /**
@@ -186,7 +199,6 @@ class AuthorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         if ($fileData = $this->uploadAction()) {
             $author->setImage($fileData->getName());
         };
-
     }
 
     /**
@@ -203,7 +215,6 @@ class AuthorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         }
 
         return $author->getPassword();
-
     }
 
     /**
@@ -219,18 +230,16 @@ class AuthorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 
         $dataProperties = $author->_getCleanProperties();
 
-        if(isset($dataProperties['password'])) {
+        if (isset($dataProperties['password'])) {
 
             $dataPass = $dataProperties['password'];
 
-            if($dataPass === $author->getPassword()) {
+            if ($dataPass === $author->getPassword()) {
                 $success = FALSE;
             }
-
         }
 
         return $success;
-
     }
 
     /**
@@ -251,13 +260,58 @@ class AuthorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             if (is_object($objSalt)) {
                 $saltedPassword = $objSalt->getHashedPassword($password);
             }
-
         }
 
         return $saltedPassword;
+    }
+
+    /**
+     * initialize active action
+     *
+     * @return void
+     */
+    public function initializeActivateAction()
+    {
+        $querySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
+        $querySettings->setRespectStoragePage(FALSE);
+        $querySettings->setIgnoreEnableFields(TRUE);
+        $querySettings->setEnableFieldsToBeIgnored(array('disabled'));
+        $querySettings->setIncludeDeleted(TRUE);
+        $this->authorRepository->setDefaultQuerySettings($querySettings);
+    }
+
+    /**
+     * Send activation email
+     *
+     * @param $url
+     */
+    private function sendEmail($url) {
+
+        $to      = 'khanhdeux@gmail.com';
+        $subject = 'the subject';
+        $message = 'Activation link:' . $url;
+        $headers = 'From: khanhdeux@arrabiata.de' . "\r\n" .
+            'Reply-To: khanhdeux@arrabiata.de' . "\r\n" .
+            'X-Mailer: PHP/' . phpversion();
+
+        mail($to, $subject, $message, $headers);
 
     }
 
+    /**
+     * Activate the author - activate the author: switch disable -> 0
+     *
+     * @param string $authorID
+     */
+    public function activateAction($authorID)
+    {
+        /** @var \Vendor\Guestbook\Domain\Model\Author $author */
+        $author = $this->authorRepository->findByUid((int)$authorID);
+        if($author->getDisable() == 0) $this->redirect('list', 'Comment', NULL, NULL);
+        $author->setDisable(0);
+        $this->authorRepository->update($author);
+        $this->view->assign('author', $author);
+    }
 }
 
 ?>

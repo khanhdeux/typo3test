@@ -47,7 +47,7 @@ class BlogController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         );
         $propertyMapper = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Property\\PropertyMapper');
         $post = $propertyMapper->convert($inputArray,'Lobacher\Simpleblog\Domain\Model\Post');
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($post);
+//        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($post);/
 
     }
 

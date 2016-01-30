@@ -8,11 +8,11 @@ if (!defined('TYPO3_MODE')) {
     'Commentlisting',
     array(
         'Comment' => 'list,ajaxAddComment',
-        'Author' => 'add,addForm,updateForm,update'
+        'Author' => 'add,addForm,updateForm,update,activate'
     ),
     // non-cacheable actions
     array(
         'Comment' => 'list,ajaxAddComment',
-        'Author' => 'add,addForm,updateForm,update'
+        'Author' => 'add,addForm,updateForm,update,activate'
     )
 );

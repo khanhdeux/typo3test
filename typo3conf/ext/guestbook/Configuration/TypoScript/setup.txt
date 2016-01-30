@@ -20,6 +20,7 @@ plugin.tx_guestbook_commentlisting {
                         name.mapOnProperty = fullname
                         tx_guestbook_options.mapOnProperty = options
                         tx_guestbook_tax_id.mapOnProperty = taxId
+                        disable.mapOnProperty = disable
                     }
                 }
             }

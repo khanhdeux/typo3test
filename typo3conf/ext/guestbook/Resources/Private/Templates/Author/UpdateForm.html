@@ -1,1 +1,3 @@
 <f:render partial="Author/Form" arguments="{headline:'Edit Author',action:'update',submitmessage:'Update Author!',author:author}" />
+{link}
+<f:link.action controller="Author" action="activate" arguments="{author:author}">Test link</f:link.action>
