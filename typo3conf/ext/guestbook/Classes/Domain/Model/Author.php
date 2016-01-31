@@ -29,7 +29,7 @@ namespace Vendor\Guestbook\Domain\Model;
 /**
  * News
  */
-class Author extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
+class Author extends \TYPO3\CMS\Extbase\Domain\Model\FrontendUser {
 
 	/**
 	 * username
@@ -70,12 +70,12 @@ class Author extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	protected $password = '';
 
-	/**
-	 * usergroup
-	 *
-	 * @var int
-	 */
-	protected $usergroup = 0;
+//	/**
+//	 * usergroup
+//	 *
+//	 * @var int
+//	 */
+//	protected $usergroup = 0;
 
     /**
      * options
@@ -213,24 +213,24 @@ class Author extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		$this->username = $username;
 	}
 
-	/**
-	 * Returns the usergroup
-	 *
-	 * @return int $usergroup
-	 */
-	public function getUsergroup() {
-		return $this->usergroup;
-	}
-
-	/**
-	 * Sets the usergroup
-	 *
-	 * @param int $usergroup
-	 * @return void
-	 */
-	public function setUsergroup($usergroup) {
-		$this->usergroup = $usergroup;
-	}
+//	/**
+//	 * Returns the usergroup
+//	 *
+//	 * @return int $usergroup
+//	 */
+//	public function getUsergroup() {
+//		return $this->usergroup;
+//	}
+//
+//	/**
+//	 * Sets the usergroup
+//	 *
+//	 * @param int $usergroup
+//	 * @return void
+//	 */
+//	public function setUsergroup($usergroup) {
+//		$this->usergroup = $usergroup;
+//	}
 
     /**
      * @return array $options

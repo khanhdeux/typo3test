@@ -18,6 +18,13 @@ class AuthorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      * @inject
      */
     protected $persistenceManager;
+    /**
+     * Protected Variable FrontendUserGroupRepository wird mit NULL initialisiert.
+     *
+     * @var \TYPO3\CMS\Extbase\Domain\Repository\FrontendUserGroupRepository
+     * @inject
+     */
+    protected $frontendUserGroupRepository = NULL;
 
     /**
      * updateForm action - displays a form for editing author
@@ -166,7 +173,7 @@ class AuthorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         $this->authorRepository->add($author);
         $baseURL = $this->request->getBaseUri();
         $this->persistenceManager->persistAll();
-        $emailConfirmationURL =  $baseURL . $this->getControllerContext()->getUriBuilder()->reset()->uriFor('activate', array('author' => $author), 'Author', $this->getControllerContext()->getRequest()->getControllerExtensionName());
+        $emailConfirmationURL = $baseURL . $this->getControllerContext()->getUriBuilder()->reset()->uriFor('activate', array('author' => $author), 'Author', $this->getControllerContext()->getRequest()->getControllerExtensionName());
 
         $this->sendEmail($emailConfirmationURL);
 
@@ -182,8 +189,11 @@ class AuthorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      */
     private function fillInAuthData(\Vendor\Guestbook\Domain\Model\Author $author)
     {
-        $userGroup = ($this->settings['usergroup']) ? $this->settings['usergroup'] : '';
+        /** @var \TYPO3\CMS\Extbase\Domain\Model\FrontendUserGroup $feUserGroup */
+        $feUserGroup = ($this->settings['usergroup']) ? $this->frontendUserGroupRepository->findByUid($this->settings['usergroup']) : '';
+        $userGroup = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
         $author->setUsergroup($userGroup);
+        $author->getUsergroup()->attach($feUserGroup);
         $this->setAuthorImage($author);
         $author->setPassword($this->getAuthorPassword($author));
     }
@@ -195,7 +205,6 @@ class AuthorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      */
     private function setAuthorImage(\Vendor\Guestbook\Domain\Model\Author $author)
     {
-
         if ($fileData = $this->uploadAction()) {
             $author->setImage($fileData->getName());
         };
@@ -209,7 +218,6 @@ class AuthorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      */
     private function getAuthorPassword(\Vendor\Guestbook\Domain\Model\Author $author)
     {
-
         if ($this->checkAuthorPassword($author)) {
             return $this->getHashedPassword($author->getPassword());
         }
@@ -225,7 +233,6 @@ class AuthorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      */
     private function checkAuthorPassword(\Vendor\Guestbook\Domain\Model\Author $author)
     {
-
         $success = TRUE;
 
         $dataProperties = $author->_getCleanProperties();
@@ -250,7 +257,6 @@ class AuthorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      */
     private function getHashedPassword($password)
     {
-
         $saltedPassword = '';
 
         if (\TYPO3\CMS\Saltedpasswords\Utility\SaltedPasswordsUtility::isUsageEnabled('FE')) {
@@ -285,9 +291,9 @@ class AuthorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      *
      * @param $url
      */
-    private function sendEmail($url) {
-
-        $to      = 'khanhdeux@gmail.com';
+    private function sendEmail($url)
+    {
+        $to = 'khanhdeux@gmail.com';
         $subject = 'the subject';
         $message = 'Activation link:' . $url;
         $headers = 'From: khanhdeux@arrabiata.de' . "\r\n" .
@@ -295,7 +301,6 @@ class AuthorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
             'X-Mailer: PHP/' . phpversion();
 
         mail($to, $subject, $message, $headers);
-
     }
 
     /**
@@ -307,7 +312,7 @@ class AuthorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     {
         /** @var \Vendor\Guestbook\Domain\Model\Author $author */
         $author = $this->authorRepository->findByUid((int)$author);
-        if($author->getDisable() == 0) $this->redirect('list', 'Comment', NULL, NULL);
+        if ($author->getDisable() == 0) $this->redirect('list', 'Comment', NULL, NULL);
         $author->setDisable(0);
         $this->authorRepository->update($author);
         $this->view->assign('author', $author);

@@ -34,9 +34,7 @@ class CommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      */
     public function listAction()
     {
-
         if ($authorID = $GLOBALS['TSFE']->fe_user->user['uid']) {
-
 //            $author = $this->objectManager->get('Vendor\\Guestbook\\Domain\\Repository\\AuthorRepository')->findOneByUid($authorID);
             $author = $this->authorRepository->findByUid($authorID);
             $this->view->assign('author', $author);
