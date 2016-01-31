@@ -6,7 +6,7 @@ plugin.tx_guestbook_commentlisting {
 		layoutRootPath = {$plugin.tx_guestbook_commentlisting.view.layoutRootPath}
 	}
     persistence {
-        storagePid = 3,4,5
+        storagePid = 11,12,9
         recursive = 1
         classes {
             Vendor\Guestbook\Domain\Model\Comment {
@@ -83,7 +83,7 @@ page {
 
 ajaxAddComment = PAGE
 ajaxAddComment {
-    typeNum = 99
+    typeNum = 98
     config {
         disableAllHeaderCode = 1
         additionalHeaders = Content-type:application/json

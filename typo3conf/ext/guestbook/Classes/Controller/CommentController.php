@@ -11,7 +11,6 @@ class CommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      * @inject
      */
     protected $commentRepository;
-
     /**
      * authorRepository
      *
@@ -19,7 +18,6 @@ class CommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
      * @inject
      */
     protected $authorRepository;
-
     /**
      * Persistence Manager
      *
@@ -42,11 +40,9 @@ class CommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 //            $author = $this->objectManager->get('Vendor\\Guestbook\\Domain\\Repository\\AuthorRepository')->findOneByUid($authorID);
             $author = $this->authorRepository->findByUid($authorID);
             $this->view->assign('author', $author);
-
         }
 
         $this->view->assign('comments', $this->commentRepository->findAll());
-
     }
 
     /**
@@ -69,7 +65,7 @@ class CommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
         $comment->setAuthor($author);
 
         $this->commentRepository->add($comment);
-         $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager')->persistAll();
+        $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\PersistenceManager')->persistAll();
         $this->commentRepository->update($comment);
         $comments = $this->commentRepository->findAll();
 
@@ -84,13 +80,10 @@ class CommentController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
                     'image' => $comment->getAuthor()->getImage()
                 )
             );
-
         }
 
         return json_encode($json);
-
     }
-
 }
 
 ?>

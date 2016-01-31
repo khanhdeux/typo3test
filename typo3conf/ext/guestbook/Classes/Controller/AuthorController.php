@@ -162,6 +162,7 @@ class AuthorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     public function addAction(\Vendor\Guestbook\Domain\Model\Author $author)
     {
         $this->fillInAuthData($author);
+        $author->setDisable(1);
         $this->authorRepository->add($author);
         $baseURL = $this->request->getBaseUri();
         $this->persistenceManager->persistAll();
@@ -185,7 +186,6 @@ class AuthorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
         $author->setUsergroup($userGroup);
         $this->setAuthorImage($author);
         $author->setPassword($this->getAuthorPassword($author));
-        $author->setDisable(1);
     }
 
     /**
@@ -301,12 +301,12 @@ class AuthorController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     /**
      * Activate the author - activate the author: switch disable -> 0
      *
-     * @param string $authorID
+     * @param string $author
      */
-    public function activateAction($authorID)
+    public function activateAction($author)
     {
         /** @var \Vendor\Guestbook\Domain\Model\Author $author */
-        $author = $this->authorRepository->findByUid((int)$authorID);
+        $author = $this->authorRepository->findByUid((int)$author);
         if($author->getDisable() == 0) $this->redirect('list', 'Comment', NULL, NULL);
         $author->setDisable(0);
         $this->authorRepository->update($author);

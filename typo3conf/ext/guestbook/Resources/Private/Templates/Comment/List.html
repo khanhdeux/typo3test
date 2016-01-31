@@ -1,29 +1,41 @@
-<f:layout name="default" />
+<f:layout name="default"/>
 <f:section name="content">
-    <f:security.ifAuthenticated>
-        <f:then>
-            <f:form action="ajaxAddComment" name="comment" object="{comment}">
-                <f:form.textarea property="comment" id="commentfield"/>
-                <f:form.submit value="Submit comment" class="btn btn-primary btn-xs" id="commentsubmit"/>
-            </f:form>
-            Please go <f:link.page pageUid="{settings.loginpage}">here</f:link.page> to change user <br/>
-            <f:image src="fileadmin/profile_photo/{author.image}" maxWidth="30" maxHeight="30" /> {author.fullname} (Email: {author.email}) <f:link.action controller="Author" action="updateForm" arguments="{author:author}">EDIT</f:link.action>
-        </f:then>
-        <f:else>
-            Please <f:link.page pageUid="{settings.loginpage}">Login</f:link.page> to comment. Or <f:link.action controller="Author" action="addForm" arguments="{author:author}">Here</f:link.action> to register
-        </f:else>
-    </f:security.ifAuthenticated>
+    <div id="guestBookBlock">
+        <f:security.ifAuthenticated>
+            <f:then>
+                <f:form action="ajaxAddComment" name="comment" object="{comment}">
+                    <f:form.textarea property="comment" id="commentfield"/>
+                    <f:form.submit value="Submit comment" class="btn btn-primary btn-xs" id="commentsubmit"/>
+                </f:form>
+                Please go
+                <f:link.page pageUid="{settings.loginpage}">here</f:link.page>
+                to change user <br/>
+                <f:image src="fileadmin/profile_photo/{author.image}" maxWidth="30" maxHeight="30"/>
+                {author.fullname} (Email: {author.email})
+                <f:link.action controller="Author" action="updateForm" arguments="{author:author}">EDIT</f:link.action>
+            </f:then>
+            <f:else>
+                Please
+                <f:link.page pageUid="{settings.loginpage}">Login</f:link.page>
+                to comment. Or
+                <f:link.action controller="Author" action="addForm" arguments="{author:author}">Here</f:link.action>
+                to register
+            </f:else>
+        </f:security.ifAuthenticated>
 
-    <ul class="list-group" id="comments">
-        <f:for each="{comments}" as="comment" reverse="TRUE">
-            <li class="list-group-item">{comment.comment}
-                <span class="textmuted">({comment.commentdate -> f:format.date(format: 'Y-m-d H:i:s')})</span>
-                <br /><f:image src="fileadmin/profile_photo/{comment.author.image}" maxWidth="30" maxHeight="30" /> <small><i>{comment.author.fullname} (Email: {comment.author.email})</i></small>
-            </li>
-        </f:for>
-    </ul>
+        <ul class="list-group" id="comments">
+            <f:for each="{comments}" as="comment" reverse="TRUE">
+                <li class="list-group-item">{comment.comment}
+                    <span class="textmuted">({comment.commentdate -> f:format.date(format: 'Y-m-d H:i:s')})</span>
+                    <br/>
+                    <f:image src="fileadmin/profile_photo/{comment.author.image}" maxWidth="30" maxHeight="30"/>
+                    <small><i>{comment.author.fullname} (Email: {comment.author.email})</i></small>
+                </li>
+            </f:for>
+        </ul>
 
-    <script type="text/javascript">
-        var ajaxURL = '<f:uri.action action="ajaxAddComment" controller="Comment" pageType="99" noCacheHash="1" />';
-    </script>
+        <script type="text/javascript">
+            var ajaxURL = '<f:uri.action action="ajaxAddComment" controller="Comment" pageType="98" noCacheHash="1" />';
+        </script>
+    </div>
 </f:section>

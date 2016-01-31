@@ -1,7 +1,7 @@
 <?php
 return array(
 	'BE' => array(
-		'debug' => '',
+		'debug' => '0',
 		'explicitADmode' => 'explicitAllow',
 		'installToolPassword' => '$P$C8dVpWNkDdpNbA/4Up0rkHQBnuBVM91',
 		'loginSecurityLevel' => 'rsa',
@@ -36,18 +36,18 @@ return array(
 	),
 	'FE' => array(
 		'activateContentAdapter' => FALSE,
-		'debug' => '',
+		'debug' => '0',
 		'loginSecurityLevel' => 'rsa',
 	),
 	'GFX' => array(
 		'colorspace' => 'sRGB',
-		'im' => 1,
-		'im_mask_temp_ext_gif' => 1,
-		'im_path' => '/opt/local/bin/',
-		'im_path_lzw' => '/opt/local/bin/',
-		'im_v5effects' => 1,
+		'im' => '1',
+		'im_mask_temp_ext_gif' => '1',
+		'im_path' => '/usr/local/Cellar/imagemagick/6.8.9-8/bin/',
+		'im_path_lzw' => '/usr/local/Cellar/imagemagick/6.8.9-8/bin/',
+		'im_v5effects' => '1',
 		'im_version_5' => 'im6',
-		'image_processing' => 1,
+		'image_processing' => '1',
 		'jpg_quality' => '80',
 	),
 	'SYS' => array(
@@ -65,7 +65,7 @@ return array(
 				),
 			),
 		),
-		'clearCacheSystem' => '',
+		'clearCacheSystem' => '0',
 		'compat_version' => '6.2',
 		'devIPmask' => '',
 		'displayErrors' => '1',
