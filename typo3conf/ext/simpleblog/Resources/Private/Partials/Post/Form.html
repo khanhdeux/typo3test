@@ -12,5 +12,7 @@
         <label>Post Tags</label>
         <f:form.select options="{tags}" optionLabelField="tagvalue" property="tags" size="5" multiple="1" class="form-control" />
     </div>
+    <f:form.textfield name="blog[title]" value="{blog.title}" />
+    <f:form.hidden name="blog[uid]" value="{blog.uid}" />
     <f:form.submit value="{submitmessage}" class="btn btn-primary" />
 </f:form>

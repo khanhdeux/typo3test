@@ -7,6 +7,13 @@ class PostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     /**
      * postRepository
      *
+     * @var \Lobacher\Simpleblog\Domain\Repository\BlogRepository
+     * @inject
+     */
+    protected $blogRepository = NULL;
+    /**
+     * postRepository
+     *
      * @var \Lobacher\Simpleblog\Domain\Repository\PostRepository
      * @inject
      */
@@ -18,7 +25,6 @@ class PostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      * @inject
      */
     protected $persistenceManager;
-
     /**
      * SignalSlotDispatcher
      *
@@ -88,6 +94,31 @@ class PostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     }
 
     /**
+     * Initialize Update action
+     */
+    public function initializeUpdateAction()
+    {
+        if ($this->request->hasArgument('blog')) {
+            $blog = $this->request->getArgument('blog');
+            if (!empty($blog['uid'])) {
+                $blog['__identity'] = $blog['uid'];
+                unset($blog['uid']);
+            }
+        }
+        
+        $this->request->setArgument('blog', $blog);
+
+        $this->arguments['blog']
+            ->getPropertyMappingConfiguration()
+            ->allowAllProperties()
+            ->setTypeConverterOption('TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter',
+                \TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED, TRUE)
+            ->setTypeConverterOption('TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter',
+                \TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter::CONFIGURATION_MODIFICATION_ALLOWED, TRUE);
+
+    }
+
+    /**
      * updateForm action - displays a form for editing a post
      *
      * @param \Lobacher\Simpleblog\Domain\Model\Blog $blog
@@ -112,6 +143,7 @@ class PostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         \Lobacher\Simpleblog\Domain\Model\Blog $blog,
         \Lobacher\Simpleblog\Domain\Model\Post $post)
     {
+        $this->blogRepository->update($blog);
         $this->postRepository->update($post);
         $this->redirect('show', 'Blog', NULL, array('blog' => $blog));
     }
@@ -167,7 +199,7 @@ class PostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         $this->signalSlotDispatcher->dispatch(
             __CLASS__,
             'beforeCommentCreation',
-            array($comment,$post)
+            array($comment, $post)
         );
 
         $this->postRepository->update($post);
@@ -181,5 +213,4 @@ class PostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         }
         return json_encode($json);
     }
-
 }
