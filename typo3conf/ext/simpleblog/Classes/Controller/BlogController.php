@@ -11,7 +11,6 @@ class BlogController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      * @inject
      */
     protected $blogRepository;
-
     /**
      * Persistence Manager
      *
@@ -46,9 +45,33 @@ class BlogController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             'postdate' => '2013-12-28T07:56:00+00:00'
         );
         $propertyMapper = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Property\\PropertyMapper');
-        $post = $propertyMapper->convert($inputArray,'Lobacher\Simpleblog\Domain\Model\Post');
+        $post = $propertyMapper->convert($inputArray, 'Lobacher\Simpleblog\Domain\Model\Post');
 //        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($post);/
 
+    }
+
+    /**
+     * Initialize action method validators
+     *
+     * @return void
+     */
+    protected function initializeActionMethodValidators()
+    {
+        if ($this->actionMethodName == 'addAction') {
+            parent::initializeActionMethodValidators();
+
+            $blog = $this->arguments['blog'];
+            $validator = $blog->getValidator();
+
+            $requestArguments = $this->request->getArguments();
+            $agb = $requestArguments['acceptTermsAndConditions'];
+
+            $termsAndConditions =
+                \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Lobacher\Simpleblog\Validation\Validator\TermsAndConditionsValidator',
+                    array('value' => $agb)
+                );
+            $validator->addValidator($termsAndConditions);
+        }
     }
 
     /**
@@ -145,7 +168,6 @@ class BlogController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     {
         $this->view->assign('blog', $blog);
     }
-
 }
 
 ?>

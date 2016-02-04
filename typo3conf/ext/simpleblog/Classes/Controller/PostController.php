@@ -105,7 +105,7 @@ class PostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
                 unset($blog['uid']);
             }
         }
-        
+
         $this->request->setArgument('blog', $blog);
 
         $this->arguments['blog']

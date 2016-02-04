@@ -18,5 +18,11 @@
         <f:if condition="{blog.image}"><br /><f:image src="uploads/tx_simpleblog/{blog.image}" /></f:if>
         <f:form.upload property="image" class="form-control" />
     </div>
+    <div class="form-group">
+        <f:form.validationResults for="acceptTermsAndConditions">
+            ERROR
+        </f:form.validationResults>
+        <f:form.checkbox name="acceptTermsAndConditions" value="1" /> <label>Accept terms and conditions</label>
+    </div>
     <f:form.submit value="{submitmessage}" class="btn btn-primary" />
 </f:form>
