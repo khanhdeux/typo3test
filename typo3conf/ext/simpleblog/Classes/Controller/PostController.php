@@ -215,6 +215,8 @@ class PostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     public function ajaxAction(\Lobacher\Simpleblog\Domain\Model\Post $post, \Lobacher\Simpleblog\Domain\Model\Comment $comment = NULL)
     {
 
+        file_put_contents('./debug.txt', print_r($comment, true), FILE_APPEND);
+        file_put_contents('./debug.txt', print_r("\n-----------------\n", true), FILE_APPEND);
         if ($comment->getComment() == "") return FALSE;
         // set datetime of comment and add comment to Post
         $comment->setCommentdate(new \DateTime());
@@ -238,4 +240,27 @@ class PostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
         }
         return json_encode($json);
     }
+
+    /**
+     * Ajax action - add address to textarea
+     *
+     * @return bool|string
+     */
+    public function ajaxAddressAction()
+    {
+        $responseArray = [
+            1 => [
+                'firstName' => 'firstname1',
+                'lastName' => 'lastname1'
+            ],
+            2 => [
+                'firstName' => 'firstname2',
+                'lastName' => 'lastname2'
+            ]
+        ];
+
+        $address = $this->request->getArgument('address');
+        return json_encode($responseArray[$address]);
+    }
+
 }

@@ -15,3 +15,17 @@ Comment: cascasc (Post: aaaa) / Lobacher\Simpleblog\Controller\PostController::b
 Comment: cascasc / 2016-01-27 22:57:24 / TYPO3\CMS\Extbase\Persistence\Generic\Backend::afterInsertObject
 Comment: cacascacacas (Post: aaaa) / Lobacher\Simpleblog\Controller\PostController::beforeCommentCreation
 Comment: cacascacacas / 2016-01-27 22:57:28 / TYPO3\CMS\Extbase\Persistence\Generic\Backend::afterInsertObject
+Comment: aaa (Post: ccccc) / Lobacher\Simpleblog\Controller\PostController::beforeCommentCreation
+Comment: aaa / 2016-02-07 19:48:47 / TYPO3\CMS\Extbase\Persistence\Generic\Backend::afterInsertObject
+Comment: bbbb (Post: ccccc) / Lobacher\Simpleblog\Controller\PostController::beforeCommentCreation
+Comment: bbbb / 2016-02-07 21:03:41 / TYPO3\CMS\Extbase\Persistence\Generic\Backend::afterInsertObject
+Comment: bbbbbb (Post: ccccc) / Lobacher\Simpleblog\Controller\PostController::beforeCommentCreation
+Comment: bbbbbb / 2016-02-07 21:05:37 / TYPO3\CMS\Extbase\Persistence\Generic\Backend::afterInsertObject
+Comment: ccc (Post: ccccc) / Lobacher\Simpleblog\Controller\PostController::beforeCommentCreation
+Comment: ccc / 2016-02-07 21:05:49 / TYPO3\CMS\Extbase\Persistence\Generic\Backend::afterInsertObject
+Comment: bbb (Post: ccccc) / Lobacher\Simpleblog\Controller\PostController::beforeCommentCreation
+Comment: bbb / 2016-02-07 21:07:16 / TYPO3\CMS\Extbase\Persistence\Generic\Backend::afterInsertObject
+Comment: dtdt (Post: ccccc) / Lobacher\Simpleblog\Controller\PostController::beforeCommentCreation
+Comment: dtdt / 2016-02-07 22:48:10 / TYPO3\CMS\Extbase\Persistence\Generic\Backend::afterInsertObject
+Comment: firstname1-lastname1 (Post: gjuk) / Lobacher\Simpleblog\Controller\PostController::beforeCommentCreation
+Comment: firstname1-lastname1 / 2016-02-08 00:09:30 / TYPO3\CMS\Extbase\Persistence\Generic\Backend::afterInsertObject

@@ -8,12 +8,12 @@ if (!defined('TYPO3_MODE')) {
 	'Bloglisting',
 	array(
 		'Blog' => 'list, addForm, add, show, updateForm, update, deleteConfirm, delete, rss',
-        'Post' => 'addForm,add,show,updateForm,update,deleteConfirm,delete,ajax',
+        'Post' => 'addForm,add,show,updateForm,update,deleteConfirm,delete,ajax,ajaxAddress',
 	),
 	// non-cacheable actions
 	array(
 		'Blog' => 'list, addForm, add, show, updateForm, update, deleteConfirm, delete, rss',
-        'Post' => 'addForm,add,show,updateForm,update,deleteConfirm,delete,ajax',
+        'Post' => 'addForm,add,show,updateForm,update,deleteConfirm,delete,ajax,ajaxAddress',
 	)
 );
 

@@ -11855,6 +11855,10 @@ Ext.extend(Ext.Component, Ext.util.Observable, {
     },
 
     
+
+
+
+
     getXType : function(){
         return this.constructor.xtype;
     },

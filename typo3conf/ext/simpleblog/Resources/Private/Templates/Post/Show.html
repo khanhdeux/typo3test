@@ -19,10 +19,12 @@
         </dd>
     </dl>
     <h3>Comments</h3>
-    <f:form action="ajax" name="comment" object="{comment}" arguments="{post:post}">
-        <f:form.textarea property="comment" id="commentfield"/>
+    <f:form action="ajax" name="comment" object="{comment}" arguments="{post:post}" additionalAttributes="{data-form:'comment',data-ajax-url:'{f:uri.action(action:\'ajaxAddress\', controller:\'Post\',pageType:\'99\', absolute:\'FALSE\')}'}">
+        <f:form.textarea property="comment" id="commentfield" additionalAttributes="{data-field:'comment'}" />
         <f:form.submit value="Submit comment" class="btn btn-primary btn-xs" id="commentsubmit"/>
+        <f:form.select name="address" prependOptionLabel="Select address" options="{1:'address1', 2:'address2'}" additionalAttributes="{data-field:'address'}" />
     </f:form>
+
     <ul class="list-group" id="comments">
         <f:for each="{post.comments}" as="comment" reverse="TRUE">
             <li class="list-group-item">{comment.comment} <span class="textmuted">(
