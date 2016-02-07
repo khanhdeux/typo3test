@@ -80,6 +80,31 @@ class PostController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     }
 
     /**
+     * Initialize Add action
+     */
+    public function initializeAddAction()
+    {
+        if ($this->request->hasArgument('blog')) {
+            $blog = $this->request->getArgument('blog');
+            if (!empty($blog['uid'])) {
+                $blog['__identity'] = $blog['uid'];
+                unset($blog['uid']);
+            }
+        }
+
+        $this->request->setArgument('blog', $blog);
+
+        $this->arguments['blog']
+            ->getPropertyMappingConfiguration()
+            ->allowAllProperties()
+            ->setTypeConverterOption('TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter',
+                \TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED, TRUE)
+            ->setTypeConverterOption('TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter',
+                \TYPO3\CMS\Extbase\Property\TypeConverter\PersistentObjectConverter::CONFIGURATION_MODIFICATION_ALLOWED, TRUE);
+
+    }
+
+    /**
      * show action - displays a single post
      * *
      * @param \Lobacher\Simpleblog\Domain\Model\Blog $blog
