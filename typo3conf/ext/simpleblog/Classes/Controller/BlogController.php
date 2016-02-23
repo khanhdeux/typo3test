@@ -19,6 +19,21 @@ class BlogController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     protected $persistenceManager;
 
+    /**
+     * @var \SJBR\StaticInfoTables\Domain\Repository\CountryRepository
+     */
+    protected $countryRepository;
+
+    /**
+     * Dependency injection of the Country Repository
+     *
+     * @param \SJBR\StaticInfoTables\Domain\Repository\CountryRepository $countryRepository
+     * @return void
+     */
+    public function injectCountryRepository(\SJBR\StaticInfoTables\Domain\Repository\CountryRepository $countryRepository) {
+        $this->countryRepository = $countryRepository;
+    }
+
     public function initializeAction()
     {
         if ($this->arguments->hasArgument('blog')) {
@@ -101,6 +116,7 @@ class BlogController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     public function addFormAction(\Lobacher\Simpleblog\Domain\Model\Blog $blog = NULL)
     {
         $this->view->assign('blog', $blog);
+        $this->view->assign('countries', $this->getCountries());
     }
 
     /**
@@ -167,6 +183,16 @@ class BlogController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     public function rssAction(\Lobacher\Simpleblog\Domain\Model\Blog $blog)
     {
         $this->view->assign('blog', $blog);
+    }
+
+    /**
+     * Get EU countries
+     *
+     * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+     */
+    public function getCountries() {
+        $countries = $this->countryRepository->findByEuMember(1);
+        return $countries;
     }
 }
 

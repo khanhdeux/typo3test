@@ -24,5 +24,6 @@
         </f:form.validationResults>
         <f:form.checkbox name="acceptTermsAndConditions" value="1" /> <label>Accept terms and conditions</label>
     </div>
+    <f:form.select name="country" options="{countries}" optionLabelField="nameLocalized" optionValueField="isoCodeA2" />
     <f:form.submit value="{submitmessage}" class="btn btn-primary" />
 </f:form>

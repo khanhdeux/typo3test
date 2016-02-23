@@ -493,6 +493,17 @@ return array (
       array (
       ),
     ),
+    'static_info_tables' => 
+    array (
+      'manifestPath' => '',
+      'composerName' => 'sjbr/static_info_tables',
+      'state' => 'active',
+      'packagePath' => 'typo3conf/ext/static_info_tables/',
+      'classesPath' => 'Classes/',
+      'suggestions' => 
+      array (
+      ),
+    ),
     'femanager' => 
     array (
       'state' => 'active',
@@ -500,6 +511,7 @@ return array (
       'classesPath' => 'Classes/',
       'suggestions' => 
       array (
+        0 => 'static_info_tables',
       ),
     ),
     'extension_builder' => 
@@ -665,6 +677,17 @@ return array (
       'composerName' => 'typo3/cms-scheduler',
       'state' => 'inactive',
       'packagePath' => 'typo3/sysext/scheduler/',
+      'classesPath' => 'Classes/',
+      'suggestions' => 
+      array (
+      ),
+    ),
+    'static_info_tables_de' => 
+    array (
+      'manifestPath' => '',
+      'composerName' => 'sjbr/static_info_tables_de',
+      'state' => 'inactive',
+      'packagePath' => 'typo3conf/ext/static_info_tables_de/',
       'classesPath' => 'Classes/',
       'suggestions' => 
       array (
