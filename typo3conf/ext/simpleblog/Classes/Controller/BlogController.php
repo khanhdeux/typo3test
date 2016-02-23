@@ -79,7 +79,7 @@ class BlogController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             $validator = $blog->getValidator();
 
             $requestArguments = $this->request->getArguments();
-            $agb = $requestArguments['acceptTermsAndConditions'];
+            $agb = $requestArguments['data']['acceptTermsAndConditions'];
 
             $termsAndConditions =
                 \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Lobacher\Simpleblog\Validation\Validator\TermsAndConditionsValidator',

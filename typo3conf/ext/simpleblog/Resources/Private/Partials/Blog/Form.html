@@ -19,10 +19,10 @@
         <f:form.upload property="image" class="form-control" />
     </div>
     <div class="form-group">
-        <f:form.validationResults for="acceptTermsAndConditions">
-            ERROR
+        <f:form.checkbox name="data[acceptTermsAndConditions]" value="1" /> <label>Accept terms and conditions</label>
+        <f:form.validationResults for="blog.acceptTermsAndConditions">
+            {validationResults.errors.0.message}
         </f:form.validationResults>
-        <f:form.checkbox name="acceptTermsAndConditions" value="1" /> <label>Accept terms and conditions</label>
     </div>
     <f:form.select name="country" options="{countries}" optionLabelField="nameLocalized" optionValueField="isoCodeA2" />
     <f:form.submit value="{submitmessage}" class="btn btn-primary" />
