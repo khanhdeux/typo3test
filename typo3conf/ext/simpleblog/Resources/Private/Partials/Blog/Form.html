@@ -25,5 +25,24 @@
         </f:form.validationResults>
     </div>
     <f:form.select name="country" options="{countries}" optionLabelField="nameLocalized" optionValueField="isoCodeA2" />
+    <tv:address options="{countries}" optionLabelField="nameLocalized" optionValueField="isoCodeA2">
+    </tv:address>
+
+    <select name="country2">
+        <optgroup label="Billing Address">
+            <f:for each="{countries}" as="country">
+                <option value="{country.isoCodeA2}">{country.nameLocalized}</option>
+            </f:for>
+            <option value="saab">Saab</option>
+        </optgroup>
+        <optgroup label="Shipping Address">
+            <option value="mercedes">Mercedes</option>
+            <option value="audi">Audi</option>
+        </optgroup>
+        <optgroup label="_________">
+            <option value>+ New</option>
+        </optgroup>
+    </select>
+
     <f:form.submit value="{submitmessage}" class="btn btn-primary" />
 </f:form>
