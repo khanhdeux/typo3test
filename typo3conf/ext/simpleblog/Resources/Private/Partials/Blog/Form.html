@@ -8,6 +8,9 @@
         </f:form.validationResults>
         <label {tv:hasError(property:'title',then:' class="text-danger"')}>Blog Title</label>
         <f:form.textfield property="title" class="form-control" />
+        <f:form.textfield name="company[companyName2]" class="form-control" value="{company.companyName2}" />
+        <f:form.textfield name="company[companyName3]" class="form-control" value="{company.companyName3}"/>
+        <f:form.textfield name="company[companyName4]" class="form-control" value="{company.companyName4}"/>
     </div>
     <div class="form-group">
         <label>Blog Description</label>

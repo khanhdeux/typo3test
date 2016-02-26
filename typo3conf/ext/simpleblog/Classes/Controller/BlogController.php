@@ -18,7 +18,6 @@ class BlogController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      * @inject
      */
     protected $persistenceManager;
-
     /**
      * @var \SJBR\StaticInfoTables\Domain\Repository\CountryRepository
      */
@@ -30,7 +29,8 @@ class BlogController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      * @param \SJBR\StaticInfoTables\Domain\Repository\CountryRepository $countryRepository
      * @return void
      */
-    public function injectCountryRepository(\SJBR\StaticInfoTables\Domain\Repository\CountryRepository $countryRepository) {
+    public function injectCountryRepository(\SJBR\StaticInfoTables\Domain\Repository\CountryRepository $countryRepository)
+    {
         $this->countryRepository = $countryRepository;
     }
 
@@ -93,9 +93,10 @@ class BlogController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      * add action - adds a blog to the repository
      *
      * @param \Lobacher\Simpleblog\Domain\Model\Blog $blog
+     * @param array $company
      * @validate $blog Lobacher.Simpleblog:Facebook
      */
-    public function addAction(\Lobacher\Simpleblog\Domain\Model\Blog $blog)
+    public function addAction(\Lobacher\Simpleblog\Domain\Model\Blog $blog, array $company)
     {
 
         $this->addFlashMessage(
@@ -103,6 +104,8 @@ class BlogController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             'Status',
             \TYPO3\CMS\Core\Messaging\AbstractMessage::OK, TRUE
         );
+
+        $this->setTitleToBlog($blog, $company);
 
         $this->blogRepository->add($blog);
         $this->redirect('list');
@@ -140,15 +143,24 @@ class BlogController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     public function updateFormAction(\Lobacher\Simpleblog\Domain\Model\Blog $blog)
     {
         $this->view->assign('blog', $blog);
+        $extract = explode($this->truncate($blog->getTitle(), 5), $blog->getTitle(), 2)[1];
+        $company['companyName2'] = $this->truncate($extract, 5);
+        $extract = explode($this->truncate($extract, 5), $extract, 2)[1];
+        $company['companyName3'] = $this->truncate($extract, 5);
+        $extract = explode($this->truncate($extract, 5), $extract, 2)[1];
+        $company['companyName4'] = $this->truncate($extract, 5);
+        $this->view->assign('company', $company);
     }
 
     /**
      * update action - updates a blog in the repository
      *
      * @param \Lobacher\Simpleblog\Domain\Model\Blog $blog
+     * @param array $company
      */
-    public function updateAction(\Lobacher\Simpleblog\Domain\Model\Blog $blog)
+    public function updateAction(\Lobacher\Simpleblog\Domain\Model\Blog $blog, array $company)
     {
+        $this->setTitleToBlog($blog, $company);
         $this->blogRepository->update($blog);
         $this->redirect('list');
     }
@@ -190,9 +202,34 @@ class BlogController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      *
      * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      */
-    public function getCountries() {
+    public function getCountries()
+    {
         $countries = $this->countryRepository->findByEuMember(1);
         return $countries;
+    }
+
+    /**
+     * add action - adds a blog to the repository
+     *
+     * @param \Lobacher\Simpleblog\Domain\Model\Blog &$blog
+     * @param array $company
+     */
+    public function setTitleToBlog(\Lobacher\Simpleblog\Domain\Model\Blog &$blog, array $company)
+    {
+        $companyAddition = trim(implode(" ", $company));
+        $blog->setTitle($blog->getTitle() . (($companyAddition) ? ' ' . $companyAddition : ''));
+    }
+
+    /**
+     * Truncates the given string at the specified length.
+     *
+     * @param string $str The input string.
+     * @param int $width The number of chars at which the string will be truncated.
+     * @return string
+     */
+    function truncate($str, $width)
+    {
+        return strtok(wordwrap($str, $width, "\n"), "\n");
     }
 }
 
