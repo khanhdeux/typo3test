@@ -86,6 +86,8 @@ class BlogController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
                     array('value' => $agb)
                 );
             $validator->addValidator($termsAndConditions);
+        } else {
+            parent::initializeActionMethodValidators();
         }
     }
 
@@ -159,7 +161,7 @@ class BlogController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
     {
         $this->setTitleToBlog($blog, $extraInfo);
         $this->blogRepository->update($blog);
-        $this->redirect('list');
+        $this->redirect('updateForm', 'Blog', NULL, array('blog' => $blog));;
     }
 
     /**

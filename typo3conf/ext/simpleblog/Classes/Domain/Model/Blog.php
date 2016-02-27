@@ -36,7 +36,7 @@ class Blog extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * title
      *
      * @var string
-     * @validate NotEmpty, Lobacher.Simpleblog:Word(max=3)
+     * @validate NotEmpty, Lobacher.Simpleblog:Word(max=40)
      */
     protected $title = '';
 
