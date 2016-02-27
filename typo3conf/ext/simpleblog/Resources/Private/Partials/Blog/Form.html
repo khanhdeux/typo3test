@@ -7,10 +7,11 @@
             <label {f:if(condition:validationResults.flattenedErrors.title,then:'class="text-danger"')}>Blog Title</label>
         </f:form.validationResults>
         <label {tv:hasError(property:'title',then:' class="text-danger"')}>Blog Title</label>
-        <f:form.textfield property="title" class="form-control" />
-        <f:form.textfield name="company[companyName2]" class="form-control" value="{company.companyName2}" />
-        <f:form.textfield name="company[companyName3]" class="form-control" value="{company.companyName3}"/>
-        <f:form.textfield name="company[companyName4]" class="form-control" value="{company.companyName4}"/>
+
+        <f:form.textfield property="title" class="form-control" maxlength="10"  value="{f:if(condition:extraInfo.name.0,then:'{extraInfo.name.0}')}" />
+        <f:form.textfield name="extraInfo[name][companyName2]" class="form-control"  value="{f:if(condition:extraInfo.name.1,then:'{extraInfo.name.1}')}" maxlength="10" />
+        <f:form.textfield name="extraInfo[name][companyName3]" class="form-control" value="{f:if(condition:extraInfo.name.2,then:'{extraInfo.name.2}')}" maxlength="10" />
+        <f:form.textfield name="extraInfo[name][companyName4]" class="form-control" value="{f:if(condition:extraInfo.name.3,then:'{extraInfo.name.3}')}" maxlength="10" />
     </div>
     <div class="form-group">
         <label>Blog Description</label>

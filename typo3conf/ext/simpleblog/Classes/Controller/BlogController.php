@@ -93,10 +93,10 @@ class BlogController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      * add action - adds a blog to the repository
      *
      * @param \Lobacher\Simpleblog\Domain\Model\Blog $blog
-     * @param array $company
+     * @param array $extraInfo
      * @validate $blog Lobacher.Simpleblog:Facebook
      */
-    public function addAction(\Lobacher\Simpleblog\Domain\Model\Blog $blog, array $company)
+    public function addAction(\Lobacher\Simpleblog\Domain\Model\Blog $blog, array $extraInfo)
     {
 
         $this->addFlashMessage(
@@ -105,7 +105,7 @@ class BlogController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
             \TYPO3\CMS\Core\Messaging\AbstractMessage::OK, TRUE
         );
 
-        $this->setTitleToBlog($blog, $company);
+        $this->setTitleToBlog($blog, $extraInfo);
 
         $this->blogRepository->add($blog);
         $this->redirect('list');
@@ -142,25 +142,22 @@ class BlogController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      */
     public function updateFormAction(\Lobacher\Simpleblog\Domain\Model\Blog $blog)
     {
+        $extraInfo['name'] = $this->truncateInfoToArray($blog->getTitle());
+
         $this->view->assign('blog', $blog);
-        $extract = explode($this->truncate($blog->getTitle(), 5), $blog->getTitle(), 2)[1];
-        $company['companyName2'] = $this->truncate($extract, 5);
-        $extract = explode($this->truncate($extract, 5), $extract, 2)[1];
-        $company['companyName3'] = $this->truncate($extract, 5);
-        $extract = explode($this->truncate($extract, 5), $extract, 2)[1];
-        $company['companyName4'] = $this->truncate($extract, 5);
-        $this->view->assign('company', $company);
+        $this->view->assign('extraInfo', $extraInfo);
     }
 
     /**
      * update action - updates a blog in the repository
      *
+     *
      * @param \Lobacher\Simpleblog\Domain\Model\Blog $blog
-     * @param array $company
+     * @param array $extraInfo
      */
-    public function updateAction(\Lobacher\Simpleblog\Domain\Model\Blog $blog, array $company)
+    public function updateAction(\Lobacher\Simpleblog\Domain\Model\Blog $blog, array $extraInfo)
     {
-        $this->setTitleToBlog($blog, $company);
+        $this->setTitleToBlog($blog, $extraInfo);
         $this->blogRepository->update($blog);
         $this->redirect('list');
     }
@@ -212,12 +209,13 @@ class BlogController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      * add action - adds a blog to the repository
      *
      * @param \Lobacher\Simpleblog\Domain\Model\Blog &$blog
-     * @param array $company
+     * @param array $extraInfo
      */
-    public function setTitleToBlog(\Lobacher\Simpleblog\Domain\Model\Blog &$blog, array $company)
+    public function setTitleToBlog(\Lobacher\Simpleblog\Domain\Model\Blog &$blog, array $extraInfo)
     {
-        $companyAddition = trim(implode(" ", $company));
-        $blog->setTitle($blog->getTitle() . (($companyAddition) ? ' ' . $companyAddition : ''));
+        if(!isset($extraInfo['name'])) return;
+        $extraName = trim(implode(" ", array_map('trim', $extraInfo['name'])));
+        $blog->setTitle($blog->getTitle() . (($extraName) ? ' ' . $extraName : ''));
     }
 
     /**
@@ -227,9 +225,43 @@ class BlogController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
      * @param int $width The number of chars at which the string will be truncated.
      * @return string
      */
-    function truncate($str, $width)
+    public function truncate($str, $width)
     {
         return strtok(wordwrap($str, $width, "\n"), "\n");
+    }
+
+    /**
+     * Truncate extra info into array
+     *
+     * @param $str
+     * @return array
+     */
+    public function truncateInfoToArray($str)
+    {
+        $limit = 10;
+        $this->stringToArray($str, $limit, $extra);
+        return $extra;
+    }
+
+    /**
+     * Recursive function string to array by limit
+     *
+     * @param $str
+     * @param $limit
+     * @param array $arr
+     */
+    public function stringToArray($str, $limit, &$arr = [])
+    {
+        $str = trim($str);
+
+        $arr[] = $this->truncate($str, $limit);
+        $extract = explode($this->truncate($str, $limit), $str, 2);
+
+        if (!empty($extract[1])) {
+            $this->stringToArray($extract[1], $limit, $arr);
+        } else {
+            return;
+        }
     }
 }
 
